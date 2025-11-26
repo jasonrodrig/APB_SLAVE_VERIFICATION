@@ -1,0 +1,572 @@
+class apb_master_sequence extends uvm_sequence#(apb_master_sequence_item);
+
+	//------------------------------------------------------//
+	// registering apb_master_sequence object to the factory//  
+	//------------------------------------------------------//
+
+	`uvm_object_utils(apb_master_sequence)
+
+	//------------------------------------------------------//
+	//   Creating a new constructor for apb_master_sequence//  
+	//------------------------------------------------------//
+
+	function new(string name = "apb_master_sequence");
+		super.new(name);
+	endfunction
+
+	//------------------------------------------------------//
+	//  Task to generate, randomize, and send ALU sequence  //
+	//         items repeatedly until completion            //  
+	//------------------------------------------------------//
+
+	task body();
+		repeat(`trans)begin
+			req = apb_master_sequence_item::type_id::create("req");
+			wait_for_grant();
+			void'(req.randomize());
+			send_request(req);
+			wait_for_item_done();
+		end
+	endtask
+endclass
+
+//------------------------------------------------------//
+//                   Preset sequence                    //  
+//------------------------------------------------------//
+
+class presetn extends uvm_sequence#(apb_master_sequence_item);
+	`uvm_object_utils(presetn)
+
+	function new(string name = "presetn");
+		super.new(name);
+	endfunction
+
+	task body();
+		`uvm_do_with(req,{ req.PRESETN == 0 ; })
+	endtask
+endclass 
+
+/*
+//------------------------------------------------------//
+//         single operand arithmatic sequence           //  
+//------------------------------------------------------//
+
+class single_operand_arithmatic extends uvm_sequence#(apb_master_sequence_item);
+	`uvm_object_utils(single_operand_arithmatic)
+
+	function new(string name = "single_operand_arithmatic");
+		super.new(name);
+	endfunction
+
+	task body();
+		repeat(`no_of_items) begin
+			`uvm_do_with( 
+				req,
+				{ 
+					req.rst == 0;
+					req.ce == 1;
+					req.mode == 1;
+					req.inp_valid inside {[1:2]};
+					req.cmd inside {[4:7]};
+				}
+			)
+		end
+	endtask
+endclass 
+
+//------------------------------------------------------//
+//         single operand logical sequence              //  
+//------------------------------------------------------//
+
+class single_operand_logical extends uvm_sequence#(apb_master_sequence_item);
+	`uvm_object_utils(single_operand_logical)
+
+	function new(string name = "single_operand_logical");
+		super.new(name);
+	endfunction
+
+	task body();
+		repeat(`no_of_items) begin
+			`uvm_do_with( 
+				req,
+				{ 
+					req.rst == 0;
+					req.ce == 1;
+					req.mode == 0;
+					req.inp_valid inside {[1:2]};
+					req.cmd inside {[6:11]};
+				}
+			)
+		end
+	endtask
+endclass 
+
+//------------------------------------------------------//
+//         two operand arithmatic sequence              //  
+//------------------------------------------------------//
+
+class two_operand_arithmatic extends uvm_sequence#(apb_master_sequence_item);
+	`uvm_object_utils(two_operand_arithmatic)
+
+	function new(string name = "two_operand_arithmatic");
+		super.new(name);
+	endfunction
+
+	task body();
+		repeat(`no_of_items) begin
+			`uvm_do_with( 
+				req,
+				{ 
+					req.rst == 0;
+					req.ce == 1;
+					req.mode == 1;
+					req.inp_valid == 3;
+					req.cmd inside {[0:3],[8:10]};
+				}
+			)
+		end
+	endtask
+endclass 
+
+//------------------------------------------------------//
+//            two operand logical sequence              //  
+//------------------------------------------------------//
+
+class two_operand_logical extends uvm_sequence#(apb_master_sequence_item);
+	`uvm_object_utils(two_operand_logical)
+
+	function new(string name = "two_operand_logical");
+		super.new(name);
+	endfunction
+
+	task body();
+		repeat(`no_of_items) begin
+			`uvm_do_with( 
+				req,
+				{ 
+					req.rst == 0;
+					req.ce == 1;
+					req.mode == 0;
+					req.inp_valid == 3;
+					req.cmd inside {[0:5],[12:13]};
+				}
+			)
+		end
+	endtask
+endclass 
+
+//------------------------------------------------------//
+//      single operand arithmatic error sequence        //  
+//------------------------------------------------------//
+
+class single_operand_arithmatic_error extends uvm_sequence#(apb_master_sequence_item);
+	`uvm_object_utils(single_operand_arithmatic_error)
+
+	function new(string name = "single_operand_arithmatic_error");
+		super.new(name);
+	endfunction
+
+	task body();
+		repeat(`no_of_items) begin
+			`uvm_do_with( 
+				req,
+				{ 
+					req.rst == 0;
+					req.ce == 1;
+					req.mode == 1;
+					req.inp_valid inside { 0 , 3 };
+					req.cmd inside {[4:7]};
+				}
+			)
+		end
+	endtask
+endclass 
+
+//------------------------------------------------------//
+//      single operand logical error sequence           //  
+//------------------------------------------------------//
+
+class single_operand_logical_error extends uvm_sequence#(apb_master_sequence_item);
+	`uvm_object_utils(single_operand_logical_error)
+
+	function new(string name = "single_operand_logical_error");
+		super.new(name);
+	endfunction
+
+	task body();
+		repeat(`no_of_items) begin
+			`uvm_do_with( 
+				req,
+				{ 
+					req.rst == 0;
+					req.ce == 1;
+					req.mode == 0;
+					req.inp_valid inside { 0 , 3 };
+					req.cmd inside {[6:11]};
+				}
+			)
+		end
+	endtask
+endclass 
+
+//------------------------------------------------------//
+//      two operand arithmatic error sequence           //  
+//------------------------------------------------------//
+
+class two_operand_arithmatic_error extends uvm_sequence#(apb_master_sequence_item);
+	`uvm_object_utils(two_operand_arithmatic_error)
+
+	function new(string name = "two_operand_arithmatic_error");
+		super.new(name);
+	endfunction
+
+	task body();
+		repeat(`no_of_items) begin
+			`uvm_do_with( 
+				req,
+				{ 
+					req.rst == 0;
+					req.ce == 1;
+					req.mode == 1;
+					req.inp_valid == 0;
+					req.cmd inside {[0:3],[8:10]};
+				}
+			)
+		end
+	endtask
+endclass
+
+//------------------------------------------------------//
+//       two operand logical error sequence             //  
+//------------------------------------------------------//
+
+class two_operand_logical_error extends uvm_sequence#(apb_master_sequence_item);
+	`uvm_object_utils(two_operand_logical_error)
+
+	function new(string name = "two_operand_logical_error");
+		super.new(name);
+	endfunction
+
+	task body();
+		repeat(`no_of_items) begin
+			`uvm_do_with( 
+				req,
+				{ 
+					req.rst == 0;
+					req.ce == 1;
+					req.mode == 0;
+					req.inp_valid == 0;
+					req.cmd inside {[0:5],[12:13]};
+				}
+			)
+		end
+	endtask
+endclass
+
+//------------------------------------------------------//
+//            rotate right error sequence               //  
+//------------------------------------------------------//
+
+class rotate_right_error extends uvm_sequence#(apb_master_sequence_item);
+	`uvm_object_utils(rotate_right_error)
+
+	function new(string name = "rotate_right_error");
+		super.new(name);
+	endfunction
+
+	task body();
+		repeat(`no_of_items) begin
+			`uvm_do_with( 
+				req,
+				{ 
+					req.rst == 0;
+					req.ce == 1;
+					req.mode == 0;
+					req.inp_valid == 3;
+					req.cmd == 13;
+					req.opa == 1 ;
+					req.opb inside {[8:255]};
+				}
+			)
+		end
+	endtask
+endclass 
+
+//------------------------------------------------------//
+//            rotate left error sequence                //  
+//------------------------------------------------------//
+
+class rotate_left_error extends uvm_sequence#(apb_master_sequence_item);
+	`uvm_object_utils(rotate_left_error)
+
+	function new(string name = "rotate_left_error");
+		super.new(name);
+	endfunction
+
+	task body();
+		repeat(`no_of_items) begin
+			`uvm_do_with( 
+				req,
+				{ 
+					req.rst == 0;
+					req.ce == 1;
+					req.mode == 0;
+					req.inp_valid == 3;
+					req.cmd == 12;
+					req.opa == 1 ;
+					req.opb inside {[8:255]};
+				}
+			)
+		end
+	endtask
+endclass 
+
+//------------------------------------------------------//
+//         16 clock cycle arithmatic sequence           //  
+//------------------------------------------------------//
+
+class cycle_16_arithmatic extends uvm_sequence#(apb_master_sequence_item);
+	`uvm_object_utils(cycle_16_arithmatic)
+
+	function new(string name = "cycle_16_arithmatic");
+		super.new(name);
+	endfunction
+
+	task body();
+		repeat(`no_of_items) begin
+			`uvm_do_with( 
+				req,
+				{ 
+					req.rst == 0;
+					req.ce == 1;
+					req.mode == 1;
+					req.inp_valid inside {[1:2]};
+					req.cmd inside {[0:3],[8:10]};
+				}
+			)
+		end
+	endtask
+endclass 
+
+//------------------------------------------------------//
+//         16 clock cycle logical sequence              //  
+//------------------------------------------------------//
+
+class cycle_16_logical extends uvm_sequence#(apb_master_sequence_item);
+	`uvm_object_utils(cycle_16_logical)
+
+	function new(string name = "cycle_16_logical");
+		super.new(name);
+	endfunction
+
+	task body();
+		repeat(`no_of_items) begin
+			`uvm_do_with( 
+				req,
+				{ 
+					req.rst == 0;
+					req.ce == 1;
+					req.mode == 0;
+					req.inp_valid inside {[1:2]};
+					req.cmd inside {[0:5],[12:13]};
+				}
+			)
+		end
+	endtask
+endclass 
+
+//------------------------------------------------------//
+//           comparsion for opa > opb, opa < opb        //
+//                  and opa = opb sequence              //  
+//------------------------------------------------------//
+
+class comparison extends uvm_sequence#(apb_master_sequence_item);
+	`uvm_object_utils(comparison)
+
+	function new(string name = "comparison");
+		super.new(name);
+	endfunction
+
+	task body();
+		repeat(`no_of_items)begin 
+			`uvm_do_with( 
+				req,
+				{ 
+					req.rst == 0;
+					req.ce == 1;
+					req.mode == 1;
+					req.inp_valid == 3;
+					req.cmd == 8;
+					req.opa == req.opb;
+				}
+			)
+			`uvm_do_with( 
+				req,
+				{ 
+					req.rst == 0;
+					req.ce == 1;
+					req.mode == 1;
+					req.inp_valid == 3;
+					req.cmd == 8;
+					req.opa > req.opb;
+				}
+			)
+			`uvm_do_with( 
+				req,
+				{ 
+					req.rst == 0;
+					req.ce == 1;
+					req.mode == 1;
+					req.inp_valid == 3;
+					req.cmd == 8;
+					req.opa < req.opb;
+				}
+			)
+		end
+	endtask
+endclass 
+
+
+//------------------------------------------------------//
+// invlaid cmd check for arithmatic and logical sequence//  
+//------------------------------------------------------//
+
+class invalid_cmd extends uvm_sequence#(apb_master_sequence_item);
+	`uvm_object_utils(invalid_cmd)
+
+	function new(string name = "invalid_cmd");
+		super.new(name);
+	endfunction
+
+	task body();
+		`uvm_do_with( 
+			req,
+			{ 
+				req.rst == 0;
+				req.ce == 1;
+				req.mode == 1;
+				req.inp_valid == 3;
+				req.cmd == 15;
+			}
+		)
+		`uvm_do_with( 
+			req,
+			{ 
+				req.rst == 0;
+				req.ce == 1;
+				req.mode == 0;
+				req.inp_valid == 3;
+				req.cmd == 15;
+			}
+		)		
+	endtask
+endclass 
+
+//------------------------------------------------------//
+//      16 clock cycle arithmatic error sequence        //  
+//------------------------------------------------------//
+
+class cycle_16_arithmatic_error extends uvm_sequence#(apb_master_sequence_item);
+	`uvm_object_utils(cycle_16_arithmatic_error)
+
+	function new(string name = "cycle_16_arithmatic_error");
+		super.new(name);
+	endfunction
+
+	task body();
+		repeat(`no_of_items) begin
+			`uvm_do_with( 
+				req,
+				{ 
+					req.rst == 0;
+					req.ce == 1;
+					req.mode == 1;
+					req.inp_valid dist{ 1:= 100, 2:= 50, 3:= 1 };
+					req.cmd inside {[0:3],[8:10]};
+				}
+			)
+		end
+	endtask
+endclass 
+
+//------------------------------------------------------//
+//         16 clock cycle logical error sequence        //  
+//------------------------------------------------------//
+
+class cycle_16_logical_error extends uvm_sequence#(apb_master_sequence_item);
+	`uvm_object_utils(cycle_16_logical_error)
+
+	function new(string name = "cycle_16_logical_error");
+		super.new(name);
+	endfunction
+
+	task body();
+		repeat(`no_of_items) begin
+			`uvm_do_with( 
+				req,
+				{ 
+					req.rst == 0;
+					req.ce == 1;
+					req.mode == 0;
+					req.inp_valid dist{ 1:= 100, 2:= 50, 3:= 1 };
+					req.cmd inside {[0:5],[12:13]};
+				}
+			)
+		end
+	endtask
+endclass 
+*/
+
+//---------------------------------------------------------//
+// apb_master regression sequence for all 17 sequence test //  
+//---------------------------------------------------------//
+
+class apb_master_regression extends uvm_sequence#(apb_master_sequence_item);
+	`uvm_object_utils(apb_master_regression)
+
+	presetn                   seq0;
+ /*
+  single_operand_arithmatic seq1;
+	single_operand_logical    seq2;
+	two_operand_arithmatic    seq3;
+	two_operand_logical       seq4;
+
+	single_operand_arithmatic_error seq5;
+	single_operand_logical_error    seq6;
+	two_operand_arithmatic_error    seq7;
+	two_operand_logical_error       seq8;
+
+	rotate_right_error  seq9;
+	rotate_left_error   seq10;
+	cycle_16_arithmatic seq11;
+	cycle_16_logical    seq12;
+
+	comparison                seq13;
+	invalid_cmd               seq14;
+	cycle_16_arithmatic_error seq15;
+	cycle_16_logical_error    seq16;
+*/
+	function new(string name = "apb_master_regression");
+		super.new(name);
+	endfunction
+
+	task body();
+		`uvm_do(seq0)
+/*	`uvm_do(seq1)
+		`uvm_do(seq2)
+		`uvm_do(seq3)         
+		`uvm_do(seq4)
+		`uvm_do(seq5)
+		`uvm_do(seq6)
+		`uvm_do(seq7)         
+		`uvm_do(seq8) 
+		`uvm_do(seq9)         
+		`uvm_do(seq10)
+		`uvm_do(seq11)         
+		`uvm_do(seq12)
+		`uvm_do(seq13)
+		`uvm_do(seq14)
+		`uvm_do(seq15)
+		`uvm_do(seq16)
+*/	endtask
+endclass
