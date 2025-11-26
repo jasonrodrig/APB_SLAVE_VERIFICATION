@@ -6,7 +6,7 @@ class apb_master_test extends uvm_test;
 	// handle declaration for apb_master_environment and apb_master_test
 	apb_master_environment apb_master_env;
 	apb_master_sequence seq;
-
+  apb_master_report_server srv;
 	//------------------------------------------------------//
 	//    Creating a new constructor for apb_master_test    //  
 	//------------------------------------------------------//
@@ -24,6 +24,8 @@ class apb_master_test extends uvm_test;
 		super.build_phase(phase);
 		apb_master_env = apb_master_environment::type_id::create("apb_master_environment", this);
 		seq = apb_master_sequence::type_id::create("apb_master_seq");
+		srv = new();
+		uvm_report_server::set_server(srv);
 	endfunction : build_phase
 
 	//------------------------------------------------------//

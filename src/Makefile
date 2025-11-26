@@ -21,10 +21,10 @@ main:
 	vcover report -html coverage.ucdb -htmldir covReport -details
  
 read:
+	source $(QUESTA)
 	vcover report -details coverage.ucdb
 
 view:
-	source $(QUESTA)
 	firefox ./covReport/index.html
  
 compile:
@@ -33,8 +33,12 @@ compile:
  
 simulate:
 	vsim -c top +UVM_VERBOSITY=UVM_MEDIUM -do "run -all;exit"
- 
+
+log:
+	less -R simulation.log
+
 clean:
-	rm -rf transcript work/
+	rm -rf transcript work covReport/
+	rm dump.vcd simulation.log apb_master_top.log coverage.ucdb 
 	clear:
 	clear

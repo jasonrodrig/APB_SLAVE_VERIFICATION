@@ -4,6 +4,7 @@ package apb_master_pkg;
 	`include "defines.sv"
   `include "apb_master_sequence_item.sv"
   `include "apb_master_sequence.sv"
+	`include "apb_master_report_server.sv"
   `include "apb_master_sequencer.sv"
   `include "apb_master_driver.sv"
   `include "apb_master_active_monitor.sv"
