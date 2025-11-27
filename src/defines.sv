@@ -1,3 +1,3 @@
-`define DATA_WIDTH 16
+`define DATA_WIDTH 32
 `define ADDR_WIDTH 8 
 `define trans 5

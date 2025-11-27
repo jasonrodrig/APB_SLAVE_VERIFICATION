@@ -22,7 +22,35 @@ class apb_master_subscriber extends uvm_component;
 
 	covergroup input_coverage;
 		option.per_instance = 1;
-
+    presetn: coverpoint active_mon.PRESETN { bins b1[] = {0,1};}
+		pselx  : coverpoint active_mon.PSELX   { bins b2[] = {0,1};}
+    penable: coverpoint active_mon.PENABLE { bins b3[] = {0,1};}
+		pwrite : coverpoint active_mon.PWRITE  { bins b4[] = {0,1};}
+		pwdata : coverpoint active_mon.PWDATA  { bins b5[] = { [ 0 : ( 2 ** `DATA_WIDTH ) ]}; }
+		paddr  : coverpoint active_mon.PADDR   { bins b6[] = { [ 0 : ( 2 ** `ADDR_WIDTH ) - 1 ]}; }
+		
+		pstrb  : coverpoint active_mon.PSTRB iff(active_mon.PWRITE){ 
+			bins pstrb0 = { 4'b0001 };
+    	bins pstrb1 = { 4'b0010 };
+	  	bins pstrb2 = { 4'b0100 };
+      bins pstrb3 = { 4'b1000 };
+		}
+	  
+		byte0 : coverpoint active_mon.PWDATA[7:0]   iff(active_mon.PWRITE && active_mon.PSTRB[0]);
+		byte1 : coverpoint active_mon.PWDATA[15:8]  iff(active_mon.PWRITE && active_mon.PSTRB[1]);
+		byte2 : coverpoint active_mon.PWDATA[23:16] iff(active_mon.PWRITE && active_mon.PSTRB[2]);
+		byte3 : coverpoint active_mon.PWDATA[31:24] iff(active_mon.PWRITE && active_mon.PSTRB[3]);
+				
+    presetnxpslex:		cross presetn,pselx;
+		presetnxpenable:  cross presetn,penable;
+	  presetnxpwrite:   cross presetn,pwrite;
+		pselxpenable:     cross pselx,penable;
+		pwritexpselx:     cross pwrite,pselx;	
+    pwritexpenable:   cross pwrite,penable;
+		pstrbxdata0:      cross pstrb,byte0;
+		pstrbxdata1:      cross pstrb,byte1;
+    pstrbxdata2:      cross pstrb,byte2;
+    pstrbxdata3:      cross pstrb,byte3;
 	endgroup
 
 	//------------------------------------------------------//
@@ -31,7 +59,9 @@ class apb_master_subscriber extends uvm_component;
 
 	covergroup output_coverage;
 		option.per_instance = 1;
-
+    pready  : coverpoint passive_mon.PREADY  { bins b7[] = {0,1};}
+		pslverr : coverpoint passive_mon.PSLVERR { bins b8[] = {0,1};}
+		prdata  : coverpoint passive_mon.PRDATA  { bins b9[] = { [ 0 : ( 2 ** `DATA_WIDTH ) ]};}
   endgroup
 
 	//------------------------------------------------------//
