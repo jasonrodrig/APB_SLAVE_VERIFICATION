@@ -40,7 +40,7 @@ module top;
 		.PENABLE(vif.PENABLE),
 		.PWRITE(vif.PWRITE),
 		.PWDATA(vif.PWDATA),
-		.PSTRB(vif.PSTRB),
+//	.PSTRB(vif.PSTRB),
 		.PREADY(vif.PREADY),
 		.PRDATA(vif.PRDATA),
 		.PSLVERR(vif.PSLVERR)

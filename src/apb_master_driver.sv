@@ -1,7 +1,7 @@
 class apb_master_driver extends uvm_driver#(apb_master_sequence_item);
 
 	// declaring interface handle
-	virtual apb_master_interface vif;
+	virtual apb_master_interface.DRIVER vif;
 
 	// registering the apb_master_driver to the factory
 	`uvm_component_utils(apb_master_driver)
@@ -29,7 +29,8 @@ class apb_master_driver extends uvm_driver#(apb_master_sequence_item);
 	//------------------------------------------------------//
 
 	task run_phase(uvm_phase phase);
-		forever begin  
+		repeat(3) @(vif.apb_master_driver_cb);
+	forever begin  
 			seq_item_port.get_next_item(req);
 			apb_master_driver_code();   
 			seq_item_port.item_done();
@@ -41,7 +42,42 @@ class apb_master_driver extends uvm_driver#(apb_master_sequence_item);
 	//------------------------------------------------------//
 
 	task apb_master_driver_code();
-	
+		  if(!req.PRESETN) 
+				idle_state();
+	  	else begin
+      	setup_state();
+		  	access_state();
+			end
   endtask
 
+  task idle_state();
+     vif.apb_master_driver_cb.PSELX   <= 'b0; 
+		 vif.apb_master_driver_cb.PENABLE <= 'b0;
+		 @(vif.apb_master_driver_cb);
+	endtask
+  
+	task setup_state();
+     vif.apb_master_driver_cb.PSELX   <= 'b1; 
+		 vif.apb_master_driver_cb.PENABLE <= 'b0;
+		 vif.apb_master_driver_cb.PADDR   <=  req.PADDR;
+		 vif.apb_master_driver_cb.PWRITE  <=  req.PWRITE;
+		 if(req.PWRITE) vif.apb_master_driver_cb.PWDATA <= req.PWDATA;
+		 @(vif.apb_master_driver_cb);
+	endtask
+ 
+	task access_state(); 
+     vif.apb_master_driver_cb.PSELX   <= 'b1; 
+		 vif.apb_master_driver_cb.PENABLE <= 'b1;
+	   @(vif.apb_master_driver_cb);
+     wait_state_detection();
+		 idle_state();
+	endtask
+
+	task wait_state_detection();
+		while(!vif.apb_master_driver_cb.PREADY)
+		begin
+      @(vif.apb_master_driver_cb); 
+		end
+	endtask
+   
 endclass

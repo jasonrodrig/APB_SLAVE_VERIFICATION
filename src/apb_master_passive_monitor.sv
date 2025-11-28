@@ -1,7 +1,7 @@
 class apb_master_passive_monitor extends uvm_monitor;
 
 	// declaring interface handle for passive monitor
-	virtual apb_master_interface vif;
+	virtual apb_master_interface.MONITOR vif;
 
 	// declaring the analysis port for passive monitor
 	uvm_analysis_port#(apb_master_sequence_item) passive_mon_port;
@@ -37,9 +37,12 @@ class apb_master_passive_monitor extends uvm_monitor;
 	//------------------------------------------------------//
 
 	task run_phase(uvm_phase phase);
+		repeat(3) @(vif.apb_master_monitor_cb);
 		forever begin
-			repeat(3) @(vif.apb_master_monitor_cb);
-			 // MONITOR LOGIC PASSSIVE
+			repeat(1) @(vif.apb_master_monitor_cb);
+			seq.PREADY  = vif.apb_master_monitor_cb.PREADY;
+	  	seq.PRDATA  = vif.apb_master_monitor_cb.PRDATA;
+      seq.PSLVERR = vif.apb_master_monitor_cb.PSLVERR;
       passive_mon_port.write(seq); 
 		end
 	endtask

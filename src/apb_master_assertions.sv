@@ -1,4 +1,4 @@
-interface apb_master_assertions(PCLK,PRESETN,PSELX,PWRITE,PENABLE,PADDR,PWDATA,PSTRB,PRDATA,PREADY,PSLVERR);
+interface apb_master_assertions(PCLK,PRESETN,PSELX,PWRITE,PENABLE,PADDR,PWDATA,PRDATA,PREADY,PSLVERR);//,PSTRB);
   input PCLK;
 	input PRESETN;
 	input PSELX;
@@ -6,7 +6,7 @@ interface apb_master_assertions(PCLK,PRESETN,PSELX,PWRITE,PENABLE,PADDR,PWDATA,P
 	input [`DATA_WIDTH - 1 : 0] PRDATA;
 	input PWRITE;
   input PENABLE;
-	input [ (`DATA_WIDTH ) / 8 - 1 : 0 ] PSTRB;
+//input [ (`DATA_WIDTH ) / 8 - 1 : 0 ] PSTRB;
 	input [ `ADDR_WIDTH - 1 : 0 ] PADDR;
 	input PREADY;
 	input PSLVERR;

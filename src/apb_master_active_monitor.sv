@@ -1,7 +1,7 @@
 class apb_master_active_monitor extends uvm_monitor;
 
 	// declaring interface handle for active monitor
-	virtual apb_master_interface vif;
+  virtual apb_master_interface.MONITOR vif;
 
 	// declaring the analysis port for active monitor
 	uvm_analysis_port#(apb_master_sequence_item) active_mon_port;
@@ -37,9 +37,16 @@ class apb_master_active_monitor extends uvm_monitor;
 	//------------------------------------------------------//
 
 	task run_phase(uvm_phase phase);
+		repeat(3)@(vif.apb_master_monitor_cb);
 		forever begin
-			repeat(3) @(vif.apb_master_monitor_cb);
-			// MONITOR LOGIC ACTIVE 
+			repeat(1)@(vif.apb_master_monitor_cb);
+			seq.PRESETN = vif.apb_master_monitor_cb.PRESETN;
+    	seq.PSELX   = vif.apb_master_monitor_cb.PRESETN;
+    	seq.PWRITE  = vif.apb_master_monitor_cb.PRESETN;
+    	seq.PENABLE = vif.apb_master_monitor_cb.PRESETN;
+	    seq.PADDR   = vif.apb_master_monitor_cb.PRESETN;
+  	  seq.PWDATA  = vif.apb_master_monitor_cb.PRESETN;
+//    seq.PSTRB   = vif.apb_master_monitor_cb.PSTRB; 
       active_mon_port.write(seq); 
 		end
 	endtask

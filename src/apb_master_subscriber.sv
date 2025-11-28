@@ -29,7 +29,7 @@ class apb_master_subscriber extends uvm_component;
 		pwdata : coverpoint active_mon.PWDATA  { bins b5[] = { [ 0 : ( 2 ** `DATA_WIDTH ) ]}; }
 		paddr  : coverpoint active_mon.PADDR   { bins b6[] = { [ 0 : ( 2 ** `ADDR_WIDTH ) - 1 ]}; }
 		
-		pstrb  : coverpoint active_mon.PSTRB iff(active_mon.PWRITE){ 
+/*		pstrb  : coverpoint active_mon.PSTRB iff(active_mon.PWRITE){ 
 			bins pstrb0 = { 4'b0001 };
     	bins pstrb1 = { 4'b0010 };
 	  	bins pstrb2 = { 4'b0100 };
@@ -47,11 +47,11 @@ class apb_master_subscriber extends uvm_component;
 		pselxpenable:     cross pselx,penable;
 		pwritexpselx:     cross pwrite,pselx;	
     pwritexpenable:   cross pwrite,penable;
-		pstrbxdata0:      cross pstrb,byte0;
+  	pstrbxdata0:      cross pstrb,byte0;
 		pstrbxdata1:      cross pstrb,byte1;
     pstrbxdata2:      cross pstrb,byte2;
     pstrbxdata3:      cross pstrb,byte3;
-	endgroup
+*/	endgroup
 
 	//------------------------------------------------------//
 	//                 output covergroup                    //  
