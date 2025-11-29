@@ -2,65 +2,161 @@
 `uvm_analysis_imp_decl(_passive_mon_scb)
 
 class apb_master_scoreboard extends uvm_scoreboard;
-  `uvm_component_utils(apb_master_scoreboard)
+	`uvm_component_utils(apb_master_scoreboard)
 
-  uvm_analysis_imp_active_mon_scb #(apb_master_sequence_item, apb_master_scoreboard) active_scb_port;
-  uvm_analysis_imp_passive_mon_scb #(apb_master_sequence_item, apb_master_scoreboard) passive_scb_port;
+	uvm_analysis_imp_active_mon_scb #(apb_master_sequence_item, apb_master_scoreboard) active_scb_port;
+	uvm_analysis_imp_passive_mon_scb #(apb_master_sequence_item, apb_master_scoreboard) passive_scb_port;
 
-  apb_master_sequence_item active_mon_packet_q[$];
-  apb_master_sequence_item passive_mon_packet_q[$];
+	apb_master_sequence_item active_mon_packet_q[$];
+	apb_master_sequence_item passive_mon_packet_q[$];
 
-//memory declaration
-//  bit [7:0] mem [511:0];
+	//memory declaration for slave1
+	logic [ `DATA_WIDTH - 1 : 0 ] slave [ ( 2 ** `ADDR_WIDTH ) - 1 : 0 ];
 
-  static int pass_count;
-  static int fail_count;
+	static int pass_count;
+	static int fail_count;
 
-  function new(string name = "apb_master_scoreboard", uvm_component parent);
-    super.new(name,parent);
-  endfunction: new
+	function new(string name = "apb_master_scoreboard", uvm_component parent);
+		super.new(name,parent);
+	endfunction: new
 
-  function void build_phase(uvm_phase phase);
-    super.build_phase(phase);
-    active_scb_port = new("active_scb_port",this);
-    passive_scb_port = new("passive_scb_port",this);
-  endfunction: build_phase
+	function void build_phase(uvm_phase phase);
+		super.build_phase(phase);
+		active_scb_port = new("active_scb_port",this);
+		passive_scb_port = new("passive_scb_port",this);
+	endfunction: build_phase
 
-  function void write_active_mon_scb(apb_master_sequence_item pkt);
-    `uvm_info(get_type_name(), "Received input packet ", UVM_DEBUG)
-    active_mon_packet_q.push_back(pkt);
-  endfunction: write_active_mon_scb
+	function void write_active_mon_scb(apb_master_sequence_item pkt);
+		`uvm_info("SCOREBOARD", "Received input packet ", UVM_MEDIUM)
+		active_mon_packet_q.push_back(pkt);
+	endfunction: write_active_mon_scb
 
-  function void write_passive_mon_scb(apb_master_sequence_item pkt);
-    `uvm_info(get_type_name(), "Received output packet ", UVM_DEBUG)
-    passive_mon_packet_q.push_back(pkt);
-  endfunction: write_passive_mon_scb
+	function void write_passive_mon_scb(apb_master_sequence_item pkt);
+		`uvm_info("SCOREBOARD", "Received output packet ", UVM_MEDIUM)
+		passive_mon_packet_q.push_back(pkt);
+	endfunction: write_passive_mon_scb
 
-  virtual task run_phase(uvm_phase phase);
-    apb_master_sequence_item act_item;
-    apb_master_sequence_item pass_item;
+	function void extract_phase(uvm_phase phase);
+		super.extract_phase(phase);
+		$display("");
+		`uvm_info("SCB", $sformatf("TOTAL PASS : %0d", pass_count), UVM_NONE)
+		`uvm_info("SCB", $sformatf("TOTAL FAIL : %0d", fail_count), UVM_NONE)
+		`uvm_info("SCB", $sformatf("TOTAL CASES : %0d", fail_count + pass_count), UVM_NONE)
+	endfunction: extract_phase
 
-    forever begin
-      fork
-        begin
-          wait(active_mon_packet_q.size()>0);
-          act_item  = active_mon_packet_q.pop_front();
-        end
-        begin
-          wait(passive_mon_packet_q.size()>0);
-          pass_item = passive_mon_packet_q.pop_front();
-        end
-      join
-    // comparison logic
-    end
-  endtask: run_phase
+	virtual task run_phase(uvm_phase phase);
+		apb_master_sequence_item act_item;
+		apb_master_sequence_item pass_item;
 
-  function void extract_phase(uvm_phase phase);
-    super.extract_phase(phase);
-    $display("");
-    `uvm_info("SCB", $sformatf("TOTAL PASS : %0d", pass_count), UVM_NONE)
-    `uvm_info("SCB", $sformatf("TOTAL FAIL : %0d", fail_count), UVM_NONE)
-    `uvm_info("SCB", $sformatf("TOTAL CASES : %0d", fail_count+pass_count), UVM_NONE)
-    $display("");
-  endfunction: extract_phase
+		forever begin
+			fork
+				begin
+					wait(active_mon_packet_q.size()>0);
+					act_item  = active_mon_packet_q.pop_front();
+				end
+				begin
+					wait(passive_mon_packet_q.size()>0);
+					pass_item = passive_mon_packet_q.pop_front();
+				end
+			join
+			compare( act_item , pass_item );
+		end
+	endtask: run_phase
+
+	// comparision logic
+	task compare(apb_master_sequence_item in , apb_master_sequence_item out );
+
+		//IDLE STATE SIGNALS CHECK
+
+		if( !in.PRESETN || !in.PSELX ) begin
+
+			`uvm_info( "SCOREBOARD" ,
+				$sformatf("PRESETN = %0B | PSELX = %0B | PREADY = %0B | PRDATA = %0D | PSLVERR = %0B ", 
+					in.PRESETN , in.PSELX , out.PREADY , out.PRDATA , out.PSLVERR  ) , UVM_NONE ) 
+
+			if(out.PRDATA == 'b0 && out.PSLVERR == 0 && out.PREADY == 0 ) 
+			begin
+				`uvm_info("SCOREBOARD", "---------------------------------------", UVM_NONE)
+				`uvm_info("SCOREBOARD", "----           TEST PASS           ----", UVM_NONE)
+				`uvm_info("SCOREBOARD", "---------------------------------------", UVM_NONE)
+				pass_count++;
+			end
+			else begin
+				`uvm_info("SCOREBOARD", "---------------------------------------", UVM_NONE)
+				`uvm_info("SCOREBOARD", "----           TEST FAIL           ----", UVM_NONE)
+				`uvm_info("SCOREBOARD", "---------------------------------------", UVM_NONE)
+				fail_count++;
+			end
+		end
+
+		// TRANSFER CHECK
+
+		else begin
+
+			//write operation
+
+			if( in.PWRITE && in.PSELX && in.PENABLE )
+			begin
+				slave[in.PADDR] = in.PWDATA;
+				`uvm_info( "SCOREBOARD", "WRITE TRANSFER",UVM_NONE)
+				`uvm_info( "SCOREBOARD" ,
+					$sformatf( " PRESETN = %0B | PSELX = %0B | PWRITE = %0B | PENABLE = %0B | PREADY = %0B | PRDATA = %0D | PSLVERR = %0B ",
+						in.PRESETN , in.PSELX , in.PWRITE , in.PENABLE , out.PREADY , out.PRDATA , out.PSLVERR  ) , UVM_NONE )
+				`uvm_info( "SCOREBOARD" , $sformatf("data strored at slave[%d] = %d " , in.PADDR, in.PWDATA ) , UVM_NONE )
+			end
+
+			// read operation
+
+			else if( !in.PWRITE && in.PSELX && in.PENABLE )
+			begin
+				`uvm_info( "SCOREBOARD", "READ TRANSFER",UVM_NONE)
+				`uvm_info( "SCOREBOARD" ,
+					$sformatf( " PRESETN = %0B | PSELX = %0B | PWRITE = %0B | PENABLE = %0B | PREADY = %0B | PRDATA = %0D | PSLVERR = %0B ",
+						in.PRESETN , in.PSELX , in.PWRITE , in.PENABLE , out.PREADY , out.PRDATA , out.PSLVERR  ) , UVM_NONE )
+				`uvm_info( "SCOREBOARD" , $sformatf("data stored at slave[%d] = %d " , in.PADDR, out.PRDATA ) , UVM_NONE )
+
+				if( out.PRDATA === slave[in.PADDR] && !out.PRDATA)
+				begin
+					`uvm_info("SCOREBOARD", "---------------------------------------", UVM_NONE)
+					`uvm_info("SCOREBOARD", "----           TEST PASS           ----", UVM_NONE)
+					`uvm_info("SCOREBOARD", "---------------------------------------", UVM_NONE)
+					pass_count++;
+				end
+
+				else begin
+					`uvm_info("SCOREBOARD", "---------------------------------------", UVM_NONE)
+					`uvm_info("SCOREBOARD", "----           TEST FAIL           ----", UVM_NONE)
+					`uvm_info("SCOREBOARD", "---------------------------------------", UVM_NONE)
+					fail_count++;
+				end
+			end
+
+			//slave error check
+			if( in.PADDR > ( 2 ** `ADDR_WIDTH ) - 1 )
+			begin
+				`uvm_info( "SCOREBOARD", "SLAVE ERROR CHECK",UVM_NONE)
+				`uvm_info( "SCOREBOARD" ,
+					$sformatf( " PRESETN = %0B | PSELX = %0B | PWRITE = %0B | PENABLE = %0B | PREADY = %0B | PRDATA = %0D | PSLVERR = %0B ",
+						in.PRESETN , in.PSELX , in.PWRITE , in.PENABLE , out.PREADY , out.PRDATA , out.PSLVERR  ) , UVM_NONE )
+				`uvm_info( "SCOREBOARD" , $sformatf("data stored at slave[%d] = %d " , in.PADDR, out.PRDATA ) , UVM_NONE )
+
+				if(out.PSLVERR == 1 || out.PRDATA === 'bx )
+				begin
+					`uvm_info("SCOREBOARD", "---------------------------------------", UVM_NONE)
+					`uvm_info("SCOREBOARD", "----           TEST PASS           ----", UVM_NONE)
+					`uvm_info("SCOREBOARD", "---------------------------------------", UVM_NONE)
+					pass_count++;
+				end
+
+				else begin
+					`uvm_info("SCOREBOARD", "---------------------------------------", UVM_NONE)
+					`uvm_info("SCOREBOARD", "----           TEST FAIL           ----", UVM_NONE)
+					`uvm_info("SCOREBOARD", "---------------------------------------", UVM_NONE)
+					fail_count++;
+				end
+			end
+
+		end
+	endtask
+
 endclass: apb_master_scoreboard

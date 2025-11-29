@@ -71,7 +71,7 @@ class apb_master_driver extends uvm_driver#(apb_master_sequence_item);
 		vif.apb_master_driver_cb.PENABLE <= 'b0;
 		vif.apb_master_driver_cb.PADDR   <=  req.PADDR;
 		vif.apb_master_driver_cb.PWRITE  <=  req.PWRITE;
-		vif.apb_master_driver_cb.PWDATA  <= req.PWDATA;
+		vif.apb_master_driver_cb.PWDATA  <=  req.PWDATA;
 		@(vif.apb_master_driver_cb);
 	endtask
 
