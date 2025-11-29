@@ -3,8 +3,8 @@ class apb_master_sequence_item extends uvm_sequence_item;
 	//------------------------------------------------------//
 	//             randomized input signals                 //  
 	//------------------------------------------------------//
-	     logic PSELX   , PENABLE;
-	rand logic PRESETN , PWRITE ;
+	     logic PENABLE;
+	rand logic PRESETN , PWRITE , PSELX;
 	rand logic [`DATA_WIDTH - 1:0] PWDATA ;
 	rand logic [`ADDR_WIDTH - 1:0] PADDR;
 	//rand logic [ ( `DATA_WIDTH / 8 ) - 1 : 0 ] PSTRB;

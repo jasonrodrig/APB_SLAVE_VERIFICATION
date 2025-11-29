@@ -1,5 +1,5 @@
 # vsim -vopt work.top -voptargs="+acc=npr" -assertdebug -l simulation.log -coverage -c -do "coverage save -onexit -assert -directive -cvg -codeAll coverage.ucdb; run -all; exit" 
-# Start time: 17:47:44 on Nov 28,2025
+# Start time: 17:10:58 on Nov 29,2025
 # ** Note: (vsim-3812) Design is being optimized...
 # //  Questa Sim
 # //  Version 10.6c linux Jul 25 2017
@@ -86,7 +86,7 @@
 # [1;32m[INFO] [0m [1;36m(ID=SCB)[0m [1;34m[time = 35][0m TOTAL FAIL : 0
 # [1;32m[INFO] [0m [1;36m(ID=SCB)[0m [1;34m[time = 35][0m TOTAL CASES : 0
 # 
-# [1;32m[INFO] [0m [1;36m(ID=apb_master_subscriber)[0m [1;34m[time = 35][0m [ACTIVE_MONITOR] Coverage ------> 50.07%,
+# [1;32m[INFO] [0m [1;36m(ID=apb_master_subscriber)[0m [1;34m[time = 35][0m [ACTIVE_MONITOR] Coverage ------> 16.67%,
 # [1;32m[INFO] [0m [1;36m(ID=apb_master_subscriber)[0m [1;34m[time = 35][0m [PASSIVE_MONITOR] Coverage ------> 0.00%
 # 
 # --- UVM Report Summary ---
@@ -106,5 +106,5 @@
 # ** Note: $finish    : /tools/mentor/questasim_10.6c/questasim/linux/../verilog_src/uvm-1.1d/src/base/uvm_root.svh(430)
 #    Time: 35 ns  Iteration: 66  Instance: /top
 # Saving coverage database on exit...
-# End time: 17:47:47 on Nov 28,2025, Elapsed time: 0:00:03
+# End time: 17:11:02 on Nov 29,2025, Elapsed time: 0:00:04
 # Errors: 0, Warnings: 0

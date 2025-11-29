@@ -1,7 +1,7 @@
 class apb_master_active_monitor extends uvm_monitor;
 
 	// declaring interface handle for active monitor
-  virtual apb_master_interface.MONITOR vif;
+	virtual apb_master_interface.MONITOR vif;
 
 	// declaring the analysis port for active monitor
 	uvm_analysis_port#(apb_master_sequence_item) active_mon_port;
@@ -32,23 +32,65 @@ class apb_master_active_monitor extends uvm_monitor;
 			`uvm_fatal("NOVIF",{"virtual interface must be set for: APB MONITOR INTERFACE ",get_full_name(),".vif"});
 	endfunction
 
-	//------------------------------------------------------//
-	//    capturing the input signals from the interface    //  
-	//------------------------------------------------------//
+	//--------------------------------------------------------//
+	// capturing the input signals from the interface during  // 
+	//     the transistion from IDLE -> SETUP -> ACSESS       //  
+	//--------------------------------------------------------//
 
 	task run_phase(uvm_phase phase);
 		repeat(3)@(vif.apb_master_monitor_cb);
 		forever begin
-			repeat(1)@(vif.apb_master_monitor_cb);
-			seq.PRESETN = vif.apb_master_monitor_cb.PRESETN;
-    	seq.PSELX   = vif.apb_master_monitor_cb.PRESETN;
-    	seq.PWRITE  = vif.apb_master_monitor_cb.PRESETN;
-    	seq.PENABLE = vif.apb_master_monitor_cb.PRESETN;
-	    seq.PADDR   = vif.apb_master_monitor_cb.PRESETN;
-  	  seq.PWDATA  = vif.apb_master_monitor_cb.PRESETN;
-//    seq.PSTRB   = vif.apb_master_monitor_cb.PSTRB; 
-      active_mon_port.write(seq); 
+			//repeat(1)@(vif.apb_master_monitor_cb);
+			if( !vif.apb_master_monitor_cb.PSELX || !vif.apb_master_monitor_cb.PRESETN )
+				idle_state();
+			else if( vif.apb_master_monitor_cb.PSELX && !vif.apb_master_monitor_cb.PENABLE && vif.apb_master_monitor_cb.PRESETN ) 
+			begin
+				setup_state();
+				access_state();
+			end
 		end
 	endtask
-endclass
 
+	//-------------------------------------------------------------------//
+	//    capturing the input signals from the interface in idle state   //  
+	//-------------------------------------------------------------------//
+
+	task idle_state();
+		repeat(1)@(vif.apb_master_monitor_cb);
+    seq.PRESETN = vif.apb_master_monitor_cb.PRESETN;
+		seq.PSELX   = vif.apb_master_monitor_cb.PSELX;
+  	active_mon_port.write(seq);
+	endtask	
+
+	//-------------------------------------------------------------------//
+	//    capturing the input signals from the interface in setup state  //  
+	//-------------------------------------------------------------------//
+
+	task setup_state();
+		seq.PRESETN = vif.apb_master_monitor_cb.PRESETN;
+		seq.PSELX   = vif.apb_master_monitor_cb.PSELX;
+		seq.PWRITE  = vif.apb_master_monitor_cb.PWRITE;
+		seq.PADDR   = vif.apb_master_monitor_cb.PADDR;
+		seq.PWDATA  = vif.apb_master_monitor_cb.PWDATA; 
+		repeat(1)@(vif.apb_master_monitor_cb);
+	endtask
+
+	//-------------------------------------------------------------------//
+	//    capturing the input signals from the interface in access state //  
+	//-------------------------------------------------------------------//
+
+	task access_state();
+		seq.PENABLE = vif.apb_master_monitor_cb.PENABLE;
+		while(!vif.apb_master_monitor_cb.PREADY)
+		begin
+			repeat(1)@(vif.apb_master_monitor_cb);
+		end
+
+		// not sure when to send the signals to the scoreboard
+		// yet to confirm once design is sent
+		repeat(1)@(vif.apb_master_monitor_cb);
+	  active_mon_port.write(seq); 
+		//repeat(1)@(vif.apb_master_monitor_cb);
+	endtask
+
+endclass
