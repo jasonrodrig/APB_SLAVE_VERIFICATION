@@ -27,21 +27,20 @@ class apb_master_scoreboard extends uvm_scoreboard;
 	endfunction: build_phase
 
 	function void write_active_mon_scb(apb_master_sequence_item pkt);
-		`uvm_info("SCOREBOARD", "Received input packet ", UVM_MEDIUM)
+		//`uvm_info("SCOREBOARD", "Received input packet ", UVM_MEDIUM)
 		active_mon_packet_q.push_back(pkt);
 	endfunction: write_active_mon_scb
 
 	function void write_passive_mon_scb(apb_master_sequence_item pkt);
-		`uvm_info("SCOREBOARD", "Received output packet ", UVM_MEDIUM)
+	  //`uvm_info("SCOREBOARD", "Received output packet ", UVM_MEDIUM)
 		passive_mon_packet_q.push_back(pkt);
 	endfunction: write_passive_mon_scb
 
 	function void extract_phase(uvm_phase phase);
 		super.extract_phase(phase);
-		$display("");
-		`uvm_info("SCB", $sformatf("TOTAL PASS : %0d", pass_count), UVM_NONE)
-		`uvm_info("SCB", $sformatf("TOTAL FAIL : %0d", fail_count), UVM_NONE)
-		`uvm_info("SCB", $sformatf("TOTAL CASES : %0d", fail_count + pass_count), UVM_NONE)
+		`uvm_info("SCOREBOARD", $sformatf("TOTAL PASS : %0d", pass_count), UVM_NONE)
+		`uvm_info("SCOREBOARD", $sformatf("TOTAL FAIL : %0d", fail_count), UVM_NONE)
+		`uvm_info("SCOREBOARD", $sformatf("TOTAL CASES : %0d", fail_count + pass_count), UVM_NONE)
 	endfunction: extract_phase
 
 	virtual task run_phase(uvm_phase phase);

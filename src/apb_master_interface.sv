@@ -4,7 +4,7 @@ interface apb_master_interface(input bit PCLK);
 	bit PRESETN, PSELX , PENABLE , PWRITE;
 	bit [`DATA_WIDTH - 1 :0] PWDATA ; 
 	bit [`ADDR_WIDTH - 1 :0] PADDR;
-  //	bit [ ( `DATA_WIDTH / 8 ) - 1 : 0 ] PSTRB;
+  bit [  3 : 0 ] PSTRB;
 
 	// APB_SLAVE output signals
 	logic [ `DATA_WIDTH - 1 : 0] PRDATA ;

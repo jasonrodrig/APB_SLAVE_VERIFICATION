@@ -79,14 +79,13 @@ class apb_master_passive_monitor extends uvm_monitor;
 		// not sure where to place the output either before or after 
 		// once the design ccode is shared , need to do trail and error
 
+		do begin
+		 @(vif.apb_master_monitor_cb);
+		end while (!vif.apb_master_monitor_cb.PREADY);
+
 		seq.PREADY  = vif.apb_master_monitor_cb.PREADY;
 		seq.PRDATA  = vif.apb_master_monitor_cb.PRDATA;
 		seq.PSLVERR = vif.apb_master_monitor_cb.PSLVERR; 
-
-		while(!vif.apb_master_monitor_cb.PREADY)
-		begin
-			repeat(1)@(vif.apb_master_monitor_cb);
-		end
 
 		// not sure when to send the signals to the scoreboard
 		// yet to confirm once design is sent

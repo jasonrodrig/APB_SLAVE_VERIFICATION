@@ -81,11 +81,9 @@ class apb_master_active_monitor extends uvm_monitor;
 
 	task access_state();
 		seq.PENABLE = vif.apb_master_monitor_cb.PENABLE;
-		while(!vif.apb_master_monitor_cb.PREADY)
-		begin
-			repeat(1)@(vif.apb_master_monitor_cb);
-		end
-
+		do begin
+			@(vif.apb_master_monitor_cb);
+	  end while (!vif.apb_master_monitor_cb.PREADY);
 		// not sure when to send the signals to the scoreboard
 		// yet to confirm once design is sent
 		repeat(1)@(vif.apb_master_monitor_cb);

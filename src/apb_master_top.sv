@@ -1,5 +1,5 @@
 `include "defines.sv"
-//`include "apb_slave_design.v"
+`include "apb_slave_design.v"
 `include "apb_master_interface.sv"
 `include "apb_master_packages.sv"
 `include "apb_master_assertions.sv"
@@ -17,11 +17,11 @@ module top;
 	apb_master_interface vif(PCLK);
 
 	// design instantiation
-/*	apb_slave_design DUT(
+	apb_slave DUT(
 		.PCLK(vif.PCLK),
-		.PRESETN(vif.PRESETN),
+		.PRESETn(vif.PRESETN),
 		.PADDR(vif.PADDR),
-		.PSELX(vif.PSLEX),
+		.PSEL(vif.PSELX),
 		.PENABLE(vif.PENABLE),
 		.PWRITE(vif.PWRITE),
 		.PWDATA(vif.PWDATA),
@@ -30,7 +30,7 @@ module top;
 		.PRDATA(vif.PRDATA),
 		.PSLVERR(vif.PSLVERR)
 	);
-*/
+
 	// instantiating assertion signals
 	bind vif apb_master_assertions ASSERT(
 		.PCLK(vif.PCLK),
@@ -40,7 +40,7 @@ module top;
 		.PENABLE(vif.PENABLE),
 		.PWRITE(vif.PWRITE),
 		.PWDATA(vif.PWDATA),
-//	.PSTRB(vif.PSTRB),
+  	.PSTRB(vif.PSTRB),
 		.PREADY(vif.PREADY),
 		.PRDATA(vif.PRDATA),
 		.PSLVERR(vif.PSLVERR)
@@ -55,7 +55,8 @@ module top;
 
 	// initatiating apb_master_regresion_test 
 	initial begin 
-		run_test("apb_master_regression_test");
+		//run_test("presetn_test");
+		 run_test("apb_master_regression_test");
 		#1000 $finish;
 	end
 endmodule

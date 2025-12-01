@@ -89,10 +89,16 @@ class apb_master_driver extends uvm_driver#(apb_master_sequence_item);
 	//------------------------------------------------------//
 
 	task wait_state_detection();
-		while(!vif.apb_master_driver_cb.PREADY)
-		begin
-			@(vif.apb_master_driver_cb); 
-		end
+		int cycle_cnt = 0;
+		do begin
+			@(vif.apb_master_driver_cb);
+			cycle_cnt++;
+			if (cycle_cnt > 10) begin
+				`uvm_error("APB_DRV","PREADY timeout (>1000 cycles) - aborting transaction")
+				break;
+			end
+		end while (!vif.apb_master_driver_cb.PREADY);
+
 		@(vif.apb_master_driver_cb);
 	endtask
 

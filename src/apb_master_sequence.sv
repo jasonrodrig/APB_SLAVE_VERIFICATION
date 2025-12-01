@@ -46,33 +46,62 @@ class presetn extends uvm_sequence#(apb_master_sequence_item);
 	endtask
 endclass 
 
-/*
+
 //------------------------------------------------------//
-//         single operand arithmatic sequence           //  
+//               write transfer sequence                //  
 //------------------------------------------------------//
 
-class single_operand_arithmatic extends uvm_sequence#(apb_master_sequence_item);
-	`uvm_object_utils(single_operand_arithmatic)
+class write_transfer extends uvm_sequence#(apb_master_sequence_item);
+	`uvm_object_utils(write_transfer)
 
-	function new(string name = "single_operand_arithmatic");
+	function new(string name = "write_transfer");
 		super.new(name);
 	endfunction
 
 	task body();
-		repeat(`no_of_items) begin
+	//	repeat(`trans) begin
 			`uvm_do_with( 
 				req,
 				{ 
-					req.rst == 0;
-					req.ce == 1;
-					req.mode == 1;
-					req.inp_valid inside {[1:2]};
-					req.cmd inside {[4:7]};
+				 req.PRESETN == 1;
+				 req.PSELX ==	1;
+				 req.PWRITE == 1;
+				 req.PADDR == 6;
+				 req.PWDATA == 25;
 				}
 			)
-		end
+	//	end
 	endtask
 endclass 
+
+//------------------------------------------------------//
+//               read transfer sequence                //  
+//------------------------------------------------------//
+
+class read_transfer extends uvm_sequence#(apb_master_sequence_item);
+	`uvm_object_utils(read_transfer)
+
+	function new(string name = "read_transfer");
+		super.new(name);
+	endfunction
+
+	task body();
+	//	repeat(`trans) begin
+			`uvm_do_with( 
+				req,
+				{ 
+				 req.PRESETN == 1;
+				 req.PSELX ==	1;
+				 req.PWRITE == 0;
+				 req.PADDR == 6;
+				 //req.PDATA inside {[0:255]};
+				}
+			)
+	//	end
+	endtask
+endclass 
+
+/*
 
 //------------------------------------------------------//
 //         single operand logical sequence              //  
@@ -525,9 +554,9 @@ class apb_master_regression extends uvm_sequence#(apb_master_sequence_item);
 	`uvm_object_utils(apb_master_regression)
 
 	presetn                   seq0;
- /*
-  single_operand_arithmatic seq1;
-	single_operand_logical    seq2;
+  write_transfer            seq1;
+	read_transfer             seq2;
+/*	
 	two_operand_arithmatic    seq3;
 	two_operand_logical       seq4;
 
@@ -552,9 +581,9 @@ class apb_master_regression extends uvm_sequence#(apb_master_sequence_item);
 
 	task body();
 		`uvm_do(seq0)
-/*	`uvm_do(seq1)
-		`uvm_do(seq2)
-		`uvm_do(seq3)         
+  	`uvm_do(seq1)
+	  `uvm_do(seq2)
+/*	`uvm_do(seq3)         
 		`uvm_do(seq4)
 		`uvm_do(seq5)
 		`uvm_do(seq6)

@@ -15,3 +15,4 @@ apb_master_sequencer.sv
 apb_master_subscriber.sv
 apb_master_test.sv
 apb_master_top.sv
+apb_slave_design.v

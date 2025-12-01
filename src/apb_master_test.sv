@@ -72,32 +72,60 @@ class presetn_test extends apb_master_test;
 	endtask
 endclass
 
-/*
+
 //------------------------------------------------------//
-//         single operand arithmatic test               //  
+//              write transfer test                     //  
 //------------------------------------------------------//
 
-class single_operand_arithmatic_test extends apb_master_test;
+class write_transfer_test extends apb_master_test;
 
-	`uvm_component_utils( single_operand_arithmatic_test)
-	single_operand_arithmatic seq1;
+	`uvm_component_utils( write_transfer_test)
+	 write_transfer seq1;
 
-	function new(string name = " single_operand_arithmatic_test", uvm_component parent);
+	function new(string name = "write_transfer_test", uvm_component parent);
 		super.new(name,parent);
 	endfunction : new
 
 	function void build_phase(uvm_phase phase);
 		super.build_phase(phase);
-		seq1 = single_operand_arithmatic ::type_id::create("apb_master_seq1");
+		seq1 = write_transfer ::type_id::create("write_transfer_seq1");
 	endfunction : build_phase
 
 	task run_phase(uvm_phase phase);
 		phase.raise_objection(this);
-		seq1.start(apb_master_env.alu_active_agt.alu_active_seqr);
+		seq1.start(apb_master_env.apb_master_active_agt.apb_master_active_seqr);
 		phase.drop_objection(this);
 	endtask
 endclass
 
+
+//------------------------------------------------------//
+//               read transfer test                     //  
+//------------------------------------------------------//
+
+class read_transfer_test extends apb_master_test;
+
+	`uvm_component_utils( read_transfer_test)
+	 read_transfer seq2;
+
+	function new(string name = "read_transfer_test", uvm_component parent);
+		super.new(name,parent);
+	endfunction : new
+
+	function void build_phase(uvm_phase phase);
+		super.build_phase(phase);
+		seq2 = read_transfer ::type_id::create("read_transfer_seq2");
+	endfunction : build_phase
+
+	task run_phase(uvm_phase phase);
+		phase.raise_objection(this);
+		seq2.start(apb_master_env.apb_master_active_agt.apb_master_active_seqr);
+		phase.drop_objection(this);
+	endtask
+endclass
+
+
+/*
 //------------------------------------------------------//
 //         single operand logical test                  //  
 //------------------------------------------------------//
