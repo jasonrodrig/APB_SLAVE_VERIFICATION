@@ -12,7 +12,7 @@ interface apb_master_interface(input bit PCLK);
 
 	// Clocking block apb_master_driver_cb synchronizes DUT inputs
 	clocking apb_master_driver_cb @(posedge PCLK);
-		default input #1 output #1;
+		default input #0 output #0;
 		input  PREADY;
 		output PRESETN;
 		output PSELX;
@@ -25,7 +25,7 @@ interface apb_master_interface(input bit PCLK);
 
 	// Clocking block apb_master_monitor_cb synchronizes DUT inputs and outputs
 	clocking apb_master_monitor_cb @(posedge PCLK);
-		default input #1 output #1;
+		default input #0 output #0;
 		input PRESETN;
 		input PSELX;
 		input PWRITE;

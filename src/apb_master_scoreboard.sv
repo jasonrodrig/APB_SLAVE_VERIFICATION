@@ -94,7 +94,7 @@ class apb_master_scoreboard extends uvm_scoreboard;
 
 			//write operation
 
-			if( in.PWRITE && in.PSELX && in.PENABLE )
+			if( in.PWRITE && in.PSELX && in.PENABLE && out.PREADY )
 			begin
 				slave[in.PADDR] = in.PWDATA;
 				`uvm_info( "SCOREBOARD", "WRITE TRANSFER",UVM_NONE)
@@ -106,7 +106,7 @@ class apb_master_scoreboard extends uvm_scoreboard;
 
 			// read operation
 
-			else if( !in.PWRITE && in.PSELX && in.PENABLE )
+			else if( !in.PWRITE && in.PSELX && in.PENABLE && out.PREADY )
 			begin
 				`uvm_info( "SCOREBOARD", "READ TRANSFER",UVM_NONE)
 				`uvm_info( "SCOREBOARD" ,
@@ -114,7 +114,7 @@ class apb_master_scoreboard extends uvm_scoreboard;
 						in.PRESETN , in.PSELX , in.PWRITE , in.PENABLE , out.PREADY , out.PRDATA , out.PSLVERR  ) , UVM_NONE )
 				`uvm_info( "SCOREBOARD" , $sformatf("data stored at slave[%d] = %d " , in.PADDR, out.PRDATA ) , UVM_NONE )
 
-				if( out.PRDATA === slave[in.PADDR] && !out.PRDATA)
+				if( out.PRDATA === slave[in.PADDR] && !out.PSLVERR)
 				begin
 					`uvm_info("SCOREBOARD", "---------------------------------------", UVM_NONE)
 					`uvm_info("SCOREBOARD", "----           TEST PASS           ----", UVM_NONE)

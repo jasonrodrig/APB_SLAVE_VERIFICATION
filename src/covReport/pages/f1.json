@@ -1,0 +1,34 @@
+var g_data = {
+f8:{
+scopes:[{link:'z.htm?f=0&s=8',val:'work.apb_slave'}]
+,FSMs:[{dummy:0}
+,{anchor:'cvg98',items:[{c:'Y',p:'87.50',z:'present_state'}
+,{cr:'c',s:'1',z:'IDLE',h:'10',c:'g'}
+,{cr:'c',z:'IDLE -> SETUP',h:'4',c:'g'}
+,{cr:'c',s:'1',z:'SETUP',h:'4',c:'g'}
+,{cr:'c',z:'SETUP -> ACCESS',h:'4',c:'g'}
+,{cr:'m',z:'SETUP -> IDLE',h:'0',c:'r'}
+,{cr:'c',s:'1',z:'ACCESS',h:'4',c:'g'}
+,{cr:'c',z:'ACCESS -> IDLE',h:'4',c:'g'}
+]}
+
+],
+},
+f92:{
+scopes:[{s:'10',b:'1',val:'top'},{link:'z.htm?f=0&s=92',val:'DUT'}]
+,FSMs:[{dummy:0}
+,{anchor:'cvg98',items:[{c:'Y',p:'87.50',z:'present_state'}
+,{cr:'c',s:'1',z:'IDLE',h:'10',c:'g'}
+,{cr:'c',z:'IDLE -> SETUP',h:'4',c:'g'}
+,{cr:'c',s:'1',z:'SETUP',h:'4',c:'g'}
+,{cr:'c',z:'SETUP -> ACCESS',h:'4',c:'g'}
+,{cr:'m',z:'SETUP -> IDLE',h:'0',c:'r'}
+,{cr:'c',s:'1',z:'ACCESS',h:'4',c:'g'}
+,{cr:'c',z:'ACCESS -> IDLE',h:'4',c:'g'}
+]}
+
+],
+},
+dummyEnd:0
+};
+processFsmData(g_data);

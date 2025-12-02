@@ -1,56 +1,6 @@
 var g_data = {
-c8:[{dummy:0}
-,{anchor:'cvg100',items:[{s:'3',x:'FC',z:'((PSEL && PENABLE) && ~transaction_active)',c:'Y',p:'66.66',d:'0',F:'1'}
-,{}
-,{z:'PSEL',c:'r',r:'\'_0\' not hit',i:'Hit \'_0\''}
-,{z:'PENABLE',c:'g',r:'',i:''}
-,{z:'transaction_active',c:'g',r:'',i:''}
-,{}
-,{n:'1',z:'PSEL_0',h1:'0',t:'c',c1:'-'}
-,{n:'2',z:'PSEL_1',h1:'1',t:'c',c1:'(~transaction_active && PENABLE)'}
-,{n:'3',z:'PENABLE_0',h1:'1',t:'c',c1:'PSEL'}
-,{n:'4',z:'PENABLE_1',h1:'1',t:'c',c1:'(~transaction_active && PSEL)'}
-,{n:'5',z:'transaction_active_0',h1:'1',t:'c',c1:'(PSEL && PENABLE)'}
-,{n:'6',z:'transaction_active_1',h1:'1',t:'c',c1:'(PSEL && PENABLE)'}
-]}
-,{anchor:'cvg102',cr:'m',items:[{s:'3',x:'FC',z:'((PADDR == 16) || (PADDR == 17))',c:'R',p:'0.00',d:'0',F:'1'}
-,{}
-,{z:'(PADDR == 16)',c:'r',r:'No hits',i:'Hit \'_0\' and \'_1\''}
-,{z:'(PADDR == 17)',c:'r',r:'No hits',i:'Hit \'_0\' and \'_1\''}
-,{}
-,{n:'1',z:'(PADDR == 16)_0',h1:'0',t:'c',c1:'~(PADDR == 17)'}
-,{n:'2',z:'(PADDR == 16)_1',h1:'0',t:'c',c1:'-'}
-,{n:'3',z:'(PADDR == 17)_0',h1:'0',t:'c',c1:'~(PADDR == 16)'}
-,{n:'4',z:'(PADDR == 17)_1',h1:'0',t:'c',c1:'~(PADDR == 16)'}
-]}
-],
-c92:[{dummy:0}
-,{anchor:'cvg100',items:[{s:'3',x:'FC',z:'((PSEL && PENABLE) && ~transaction_active)',c:'Y',p:'66.66',d:'0',F:'1'}
-,{}
-,{z:'PSEL',c:'r',r:'\'_0\' not hit',i:'Hit \'_0\''}
-,{z:'PENABLE',c:'g',r:'',i:''}
-,{z:'transaction_active',c:'g',r:'',i:''}
-,{}
-,{n:'1',z:'PSEL_0',h1:'0',t:'c',c1:'-'}
-,{n:'2',z:'PSEL_1',h1:'1',t:'c',c1:'(~transaction_active && PENABLE)'}
-,{n:'3',z:'PENABLE_0',h1:'1',t:'c',c1:'PSEL'}
-,{n:'4',z:'PENABLE_1',h1:'1',t:'c',c1:'(~transaction_active && PSEL)'}
-,{n:'5',z:'transaction_active_0',h1:'1',t:'c',c1:'(PSEL && PENABLE)'}
-,{n:'6',z:'transaction_active_1',h1:'1',t:'c',c1:'(PSEL && PENABLE)'}
-]}
-,{anchor:'cvg102',cr:'m',items:[{s:'3',x:'FC',z:'((PADDR == 16) || (PADDR == 17))',c:'R',p:'0.00',d:'0',F:'1'}
-,{}
-,{z:'(PADDR == 16)',c:'r',r:'No hits',i:'Hit \'_0\' and \'_1\''}
-,{z:'(PADDR == 17)',c:'r',r:'No hits',i:'Hit \'_0\' and \'_1\''}
-,{}
-,{n:'1',z:'(PADDR == 16)_0',h1:'0',t:'c',c1:'~(PADDR == 17)'}
-,{n:'2',z:'(PADDR == 16)_1',h1:'0',t:'c',c1:'-'}
-,{n:'3',z:'(PADDR == 17)_0',h1:'0',t:'c',c1:'~(PADDR == 16)'}
-,{n:'4',z:'(PADDR == 17)_1',h1:'0',t:'c',c1:'~(PADDR == 16)'}
-]}
-],
-c1057:[{dummy:0}
-,{anchor:'cvg1060',cr:'c',items:[{s:'3',x:'FC',z:'(~vif.apb_master_monitor_cb.PSELX || ~vif.apb_master_monitor_cb.PRESETN)',c:'G',p:'100.00',d:'0',F:'1'}
+c1058:[{dummy:0}
+,{anchor:'cvg1061',cr:'c',items:[{s:'3',x:'FC',z:'(~vif.apb_master_monitor_cb.PSELX || ~vif.apb_master_monitor_cb.PRESETN)',c:'G',p:'100.00',d:'0',F:'1'}
 ,{}
 ,{z:'vif.apb_master_monitor_cb.PSELX',c:'g',r:'',i:''}
 ,{z:'vif.apb_master_monitor_cb.PRESETN',c:'g',r:'',i:''}
@@ -60,7 +10,7 @@ c1057:[{dummy:0}
 ,{n:'3',z:'vif.apb_master_monitor_cb.PRESETN_0',h1:'1',t:'c',c1:'vif.apb_master_monitor_cb.PSELX'}
 ,{n:'4',z:'vif.apb_master_monitor_cb.PRESETN_1',h1:'1',t:'c',c1:'vif.apb_master_monitor_cb.PSELX'}
 ]}
-,{anchor:'cvg1062',cr:'m',items:[{s:'3',x:'FC',z:'(vif.apb_master_monitor_cb.PSELX && ~vif.apb_master_monitor_cb.PENABLE && vif.apb_master_monitor_cb.PRESETN)',c:'R',p:'0.00',d:'0',F:'1'}
+,{anchor:'cvg1063',cr:'m',items:[{s:'3',x:'FC',z:'(vif.apb_master_monitor_cb.PSELX && ~vif.apb_master_monitor_cb.PENABLE && vif.apb_master_monitor_cb.PRESETN)',c:'R',p:'0.00',d:'0',F:'1'}
 ,{}
 ,{z:'vif.apb_master_monitor_cb.PSELX',c:'r',r:'\'_0\' not hit',i:'Hit \'_0\''}
 ,{z:'vif.apb_master_monitor_cb.PENABLE',c:'r',r:'\'_1\' not hit',i:'Hit \'_1\''}
@@ -74,8 +24,8 @@ c1057:[{dummy:0}
 ,{n:'6',z:'vif.apb_master_monitor_cb.PRESETN_1',h1:'1',t:'c',c1:'(vif.apb_master_monitor_cb.PSELX && ~vif.apb_master_monitor_cb.PENABLE)'}
 ]}
 ],
-c1074:[{dummy:0}
-,{anchor:'cvg1077',cr:'c',items:[{s:'3',x:'FC',z:'(~vif.apb_master_monitor_cb.PSELX || ~vif.apb_master_monitor_cb.PRESETN)',c:'G',p:'100.00',d:'0',F:'1'}
+c1075:[{dummy:0}
+,{anchor:'cvg1078',cr:'c',items:[{s:'3',x:'FC',z:'(~vif.apb_master_monitor_cb.PSELX || ~vif.apb_master_monitor_cb.PRESETN)',c:'G',p:'100.00',d:'0',F:'1'}
 ,{}
 ,{z:'vif.apb_master_monitor_cb.PSELX',c:'g',r:'',i:''}
 ,{z:'vif.apb_master_monitor_cb.PRESETN',c:'g',r:'',i:''}
@@ -85,7 +35,7 @@ c1074:[{dummy:0}
 ,{n:'3',z:'vif.apb_master_monitor_cb.PRESETN_0',h1:'1',t:'c',c1:'vif.apb_master_monitor_cb.PSELX'}
 ,{n:'4',z:'vif.apb_master_monitor_cb.PRESETN_1',h1:'1',t:'c',c1:'vif.apb_master_monitor_cb.PSELX'}
 ]}
-,{anchor:'cvg1079',cr:'m',items:[{s:'3',x:'FC',z:'(vif.apb_master_monitor_cb.PSELX && ~vif.apb_master_monitor_cb.PENABLE && vif.apb_master_monitor_cb.PRESETN)',c:'R',p:'0.00',d:'0',F:'1'}
+,{anchor:'cvg1080',cr:'m',items:[{s:'3',x:'FC',z:'(vif.apb_master_monitor_cb.PSELX && ~vif.apb_master_monitor_cb.PENABLE && vif.apb_master_monitor_cb.PRESETN)',c:'R',p:'0.00',d:'0',F:'1'}
 ,{}
 ,{z:'vif.apb_master_monitor_cb.PSELX',c:'r',r:'\'_0\' not hit',i:'Hit \'_0\''}
 ,{z:'vif.apb_master_monitor_cb.PENABLE',c:'r',r:'\'_1\' not hit',i:'Hit \'_1\''}
@@ -99,8 +49,8 @@ c1074:[{dummy:0}
 ,{n:'6',z:'vif.apb_master_monitor_cb.PRESETN_1',h1:'1',t:'c',c1:'(vif.apb_master_monitor_cb.PSELX && ~vif.apb_master_monitor_cb.PENABLE)'}
 ]}
 ],
-c1153:[{dummy:0}
-,{anchor:'cvg1189',items:[{s:'3',x:'FC',z:'(~in.PRESETN || ~in.PSELX)',c:'Y',p:'50.00',d:'0',F:'1'}
+c1154:[{dummy:0}
+,{anchor:'cvg1190',items:[{s:'3',x:'FC',z:'(~in.PRESETN || ~in.PSELX)',c:'Y',p:'50.00',d:'0',F:'1'}
 ,{}
 ,{z:'in.PRESETN',c:'g',r:'',i:''}
 ,{z:'in.PSELX',c:'r',r:'\'_0\' not hit',i:'Hit \'_0\''}
@@ -110,7 +60,7 @@ c1153:[{dummy:0}
 ,{n:'3',z:'in.PSELX_0',h1:'0',t:'c',c1:'in.PRESETN'}
 ,{n:'4',z:'in.PSELX_1',h1:'1',t:'c',c1:'in.PRESETN'}
 ]}
-,{anchor:'cvg1191',cr:'m',items:[{s:'3',x:'FC',z:'((out.PRDATA == 0) && (out.PSLVERR == 0) && (out.PREADY == 0))',c:'R',p:'0.00',d:'0',F:'1'}
+,{anchor:'cvg1192',cr:'m',items:[{s:'3',x:'FC',z:'((out.PRDATA == 0) && (out.PSLVERR == 0) && (out.PREADY == 0))',c:'R',p:'0.00',d:'0',F:'1'}
 ,{}
 ,{z:'(out.PRDATA == 0)',c:'r',r:'\'_0\' not hit',i:'Hit \'_0\''}
 ,{z:'(out.PSLVERR == 0)',c:'r',r:'\'_0\' not hit',i:'Hit \'_0\''}
@@ -123,33 +73,49 @@ c1153:[{dummy:0}
 ,{n:'5',z:'(out.PREADY == 0)_0',h1:'0',t:'c',c1:'((out.PRDATA == 0) && (out.PSLVERR == 0))'}
 ,{n:'6',z:'(out.PREADY == 0)_1',h1:'1',t:'c',c1:'((out.PRDATA == 0) && (out.PSLVERR == 0))'}
 ]}
-,{anchor:'cvg1193',cr:'m',items:[{s:'3',x:'FC',z:'(in.PWRITE && in.PSELX && in.PENABLE)',c:'R',p:'0.00',d:'0',F:'1'}
+,{anchor:'cvg1194',items:[{s:'3',x:'FC',z:'(in.PWRITE && in.PSELX && in.PENABLE && out.PREADY)',c:'Y',p:'50.00',d:'0',F:'1'}
 ,{}
-,{z:'in.PWRITE',c:'r',r:'No hits',i:'Hit \'_0\' and \'_1\''}
-,{z:'in.PSELX',c:'r',r:'No hits',i:'Hit \'_0\' and \'_1\''}
-,{z:'in.PENABLE',c:'r',r:'No hits',i:'Hit \'_0\' and \'_1\''}
+,{z:'in.PWRITE',c:'g',r:'',i:''}
+,{z:'in.PSELX',c:'r',r:'\'_0\' not hit',i:'Hit \'_0\''}
+,{z:'in.PENABLE',c:'r',r:'\'_0\' not hit',i:'Hit \'_0\''}
+,{z:'out.PREADY',c:'g',r:'',i:''}
 ,{}
-,{n:'1',z:'in.PWRITE_0',h1:'0',t:'c',c1:'-'}
-,{n:'2',z:'in.PWRITE_1',h1:'0',t:'c',c1:'(in.PSELX && in.PENABLE)'}
+,{n:'1',z:'in.PWRITE_0',h1:'1',t:'c',c1:'-'}
+,{n:'2',z:'in.PWRITE_1',h1:'1',t:'c',c1:'(in.PSELX && (in.PENABLE && out.PREADY))'}
 ,{n:'3',z:'in.PSELX_0',h1:'0',t:'c',c1:'in.PWRITE'}
-,{n:'4',z:'in.PSELX_1',h1:'0',t:'c',c1:'(in.PWRITE && in.PENABLE)'}
+,{n:'4',z:'in.PSELX_1',h1:'1',t:'c',c1:'(in.PWRITE && (in.PENABLE && out.PREADY))'}
 ,{n:'5',z:'in.PENABLE_0',h1:'0',t:'c',c1:'(in.PWRITE && in.PSELX)'}
-,{n:'6',z:'in.PENABLE_1',h1:'0',t:'c',c1:'(in.PWRITE && in.PSELX)'}
+,{n:'6',z:'in.PENABLE_1',h1:'1',t:'c',c1:'(in.PWRITE && in.PSELX && out.PREADY)'}
+,{n:'7',z:'out.PREADY_0',h1:'1',t:'c',c1:'(in.PWRITE && in.PSELX && in.PENABLE)'}
+,{n:'8',z:'out.PREADY_1',h1:'1',t:'c',c1:'(in.PWRITE && in.PSELX && in.PENABLE)'}
 ]}
-,{anchor:'cvg1195',cr:'m',items:[{s:'3',x:'FC',z:'(~in.PWRITE && in.PSELX && in.PENABLE)',c:'R',p:'0.00',d:'0',F:'1'}
+,{anchor:'cvg1196',items:[{s:'3',x:'FC',z:'(~in.PWRITE && in.PSELX && in.PENABLE && out.PREADY)',c:'Y',p:'50.00',d:'0',F:'1'}
 ,{}
-,{z:'in.PWRITE',c:'r',r:'\'_0\' not hit',i:'Hit \'_0\''}
-,{z:'in.PSELX',c:'r',r:'No hits',i:'Hit \'_0\' and \'_1\''}
-,{z:'in.PENABLE',c:'r',r:'No hits',i:'Hit \'_0\' and \'_1\''}
+,{z:'in.PWRITE',c:'g',r:'',i:''}
+,{z:'in.PSELX',c:'r',r:'\'_0\' not hit',i:'Hit \'_0\''}
+,{z:'in.PENABLE',c:'r',r:'\'_0\' not hit',i:'Hit \'_0\''}
+,{z:'out.PREADY',c:'g',r:'',i:''}
 ,{}
-,{n:'1',z:'in.PWRITE_0',h1:'0',t:'c',c1:'(in.PSELX && in.PENABLE)'}
+,{n:'1',z:'in.PWRITE_0',h1:'1',t:'c',c1:'(in.PSELX && (in.PENABLE && out.PREADY))'}
 ,{n:'2',z:'in.PWRITE_1',h1:'1',t:'c',c1:'-'}
 ,{n:'3',z:'in.PSELX_0',h1:'0',t:'c',c1:'~in.PWRITE'}
-,{n:'4',z:'in.PSELX_1',h1:'0',t:'c',c1:'(~in.PWRITE && in.PENABLE)'}
+,{n:'4',z:'in.PSELX_1',h1:'1',t:'c',c1:'(~in.PWRITE && (in.PENABLE && out.PREADY))'}
 ,{n:'5',z:'in.PENABLE_0',h1:'0',t:'c',c1:'(~in.PWRITE && in.PSELX)'}
-,{n:'6',z:'in.PENABLE_1',h1:'0',t:'c',c1:'(~in.PWRITE && in.PSELX)'}
+,{n:'6',z:'in.PENABLE_1',h1:'1',t:'c',c1:'(~in.PWRITE && in.PSELX && out.PREADY)'}
+,{n:'7',z:'out.PREADY_0',h1:'1',t:'c',c1:'(~in.PWRITE && in.PSELX && in.PENABLE)'}
+,{n:'8',z:'out.PREADY_1',h1:'1',t:'c',c1:'(~in.PWRITE && in.PSELX && in.PENABLE)'}
 ]}
-,{anchor:'cvg1197',cr:'m',items:[{s:'3',x:'FC',z:'((out.PSLVERR == 1) || (out.PRDATA === x))',c:'R',p:'0.00',d:'0',F:'1'}
+,{anchor:'cvg1198',cr:'m',items:[{s:'3',x:'FC',z:'((out.PRDATA === this.slave[in.PADDR]) && ~out.PSLVERR)',c:'R',p:'0.00',d:'0',F:'1'}
+,{}
+,{z:'(out.PRDATA === this.slave[in.PADDR])',c:'r',r:'\'_0\' not hit',i:'Hit \'_0\''}
+,{z:'out.PSLVERR',c:'r',r:'\'_1\' not hit',i:'Hit \'_1\''}
+,{}
+,{n:'1',z:'(out.PRDATA === this.slave[in.PADDR])_0',h1:'0',t:'c',c1:'-'}
+,{n:'2',z:'(out.PRDATA === this.slave[in.PADDR])_1',h1:'1',t:'c',c1:'~out.PSLVERR'}
+,{n:'3',z:'out.PSLVERR_0',h1:'1',t:'c',c1:'(out.PRDATA === this.slave[in.PADDR])'}
+,{n:'4',z:'out.PSLVERR_1',h1:'0',t:'c',c1:'(out.PRDATA === this.slave[in.PADDR])'}
+]}
+,{anchor:'cvg1200',cr:'m',items:[{s:'3',x:'FC',z:'((out.PSLVERR == 1) || (out.PRDATA === x))',c:'R',p:'0.00',d:'0',F:'1'}
 ,{}
 ,{z:'(out.PSLVERR == 1)',c:'r',r:'No hits',i:'Hit \'_0\' and \'_1\''}
 ,{z:'(out.PRDATA === x)',c:'r',r:'No hits',i:'Hit \'_0\' and \'_1\''}
@@ -160,8 +126,8 @@ c1153:[{dummy:0}
 ,{n:'4',z:'(out.PRDATA === x)_1',h1:'0',t:'c',c1:'~(out.PSLVERR == 1)'}
 ]}
 ],
-c1509:[{dummy:0}
-,{anchor:'cvg1512',cr:'c',items:[{s:'3',x:'FC',z:'(~vif.apb_master_monitor_cb.PSELX || ~vif.apb_master_monitor_cb.PRESETN)',c:'G',p:'100.00',d:'0',F:'1'}
+c1518:[{dummy:0}
+,{anchor:'cvg1521',cr:'c',items:[{s:'3',x:'FC',z:'(~vif.apb_master_monitor_cb.PSELX || ~vif.apb_master_monitor_cb.PRESETN)',c:'G',p:'100.00',d:'0',F:'1'}
 ,{}
 ,{z:'vif.apb_master_monitor_cb.PSELX',c:'g',r:'',i:''}
 ,{z:'vif.apb_master_monitor_cb.PRESETN',c:'g',r:'',i:''}
@@ -171,7 +137,7 @@ c1509:[{dummy:0}
 ,{n:'3',z:'vif.apb_master_monitor_cb.PRESETN_0',h1:'1',t:'c',c1:'vif.apb_master_monitor_cb.PSELX'}
 ,{n:'4',z:'vif.apb_master_monitor_cb.PRESETN_1',h1:'1',t:'c',c1:'vif.apb_master_monitor_cb.PSELX'}
 ]}
-,{anchor:'cvg1514',cr:'m',items:[{s:'3',x:'FC',z:'(vif.apb_master_monitor_cb.PSELX && ~vif.apb_master_monitor_cb.PENABLE && vif.apb_master_monitor_cb.PRESETN)',c:'R',p:'0.00',d:'0',F:'1'}
+,{anchor:'cvg1523',cr:'m',items:[{s:'3',x:'FC',z:'(vif.apb_master_monitor_cb.PSELX && ~vif.apb_master_monitor_cb.PENABLE && vif.apb_master_monitor_cb.PRESETN)',c:'R',p:'0.00',d:'0',F:'1'}
 ,{}
 ,{z:'vif.apb_master_monitor_cb.PSELX',c:'r',r:'\'_0\' not hit',i:'Hit \'_0\''}
 ,{z:'vif.apb_master_monitor_cb.PENABLE',c:'r',r:'\'_1\' not hit',i:'Hit \'_1\''}
@@ -185,8 +151,8 @@ c1509:[{dummy:0}
 ,{n:'6',z:'vif.apb_master_monitor_cb.PRESETN_1',h1:'1',t:'c',c1:'(vif.apb_master_monitor_cb.PSELX && ~vif.apb_master_monitor_cb.PENABLE)'}
 ]}
 ],
-c1526:[{dummy:0}
-,{anchor:'cvg1529',cr:'c',items:[{s:'3',x:'FC',z:'(~vif.apb_master_monitor_cb.PSELX || ~vif.apb_master_monitor_cb.PRESETN)',c:'G',p:'100.00',d:'0',F:'1'}
+c1535:[{dummy:0}
+,{anchor:'cvg1538',cr:'c',items:[{s:'3',x:'FC',z:'(~vif.apb_master_monitor_cb.PSELX || ~vif.apb_master_monitor_cb.PRESETN)',c:'G',p:'100.00',d:'0',F:'1'}
 ,{}
 ,{z:'vif.apb_master_monitor_cb.PSELX',c:'g',r:'',i:''}
 ,{z:'vif.apb_master_monitor_cb.PRESETN',c:'g',r:'',i:''}
@@ -196,7 +162,7 @@ c1526:[{dummy:0}
 ,{n:'3',z:'vif.apb_master_monitor_cb.PRESETN_0',h1:'1',t:'c',c1:'vif.apb_master_monitor_cb.PSELX'}
 ,{n:'4',z:'vif.apb_master_monitor_cb.PRESETN_1',h1:'1',t:'c',c1:'vif.apb_master_monitor_cb.PSELX'}
 ]}
-,{anchor:'cvg1531',cr:'m',items:[{s:'3',x:'FC',z:'(vif.apb_master_monitor_cb.PSELX && ~vif.apb_master_monitor_cb.PENABLE && vif.apb_master_monitor_cb.PRESETN)',c:'R',p:'0.00',d:'0',F:'1'}
+,{anchor:'cvg1540',cr:'m',items:[{s:'3',x:'FC',z:'(vif.apb_master_monitor_cb.PSELX && ~vif.apb_master_monitor_cb.PENABLE && vif.apb_master_monitor_cb.PRESETN)',c:'R',p:'0.00',d:'0',F:'1'}
 ,{}
 ,{z:'vif.apb_master_monitor_cb.PSELX',c:'r',r:'\'_0\' not hit',i:'Hit \'_0\''}
 ,{z:'vif.apb_master_monitor_cb.PENABLE',c:'r',r:'\'_1\' not hit',i:'Hit \'_1\''}
@@ -210,8 +176,8 @@ c1526:[{dummy:0}
 ,{n:'6',z:'vif.apb_master_monitor_cb.PRESETN_1',h1:'1',t:'c',c1:'(vif.apb_master_monitor_cb.PSELX && ~vif.apb_master_monitor_cb.PENABLE)'}
 ]}
 ],
-c1605:[{dummy:0}
-,{anchor:'cvg1641',items:[{s:'3',x:'FC',z:'(~in.PRESETN || ~in.PSELX)',c:'Y',p:'50.00',d:'0',F:'1'}
+c1614:[{dummy:0}
+,{anchor:'cvg1650',items:[{s:'3',x:'FC',z:'(~in.PRESETN || ~in.PSELX)',c:'Y',p:'50.00',d:'0',F:'1'}
 ,{}
 ,{z:'in.PRESETN',c:'g',r:'',i:''}
 ,{z:'in.PSELX',c:'r',r:'\'_0\' not hit',i:'Hit \'_0\''}
@@ -221,7 +187,7 @@ c1605:[{dummy:0}
 ,{n:'3',z:'in.PSELX_0',h1:'0',t:'c',c1:'in.PRESETN'}
 ,{n:'4',z:'in.PSELX_1',h1:'1',t:'c',c1:'in.PRESETN'}
 ]}
-,{anchor:'cvg1643',cr:'m',items:[{s:'3',x:'FC',z:'((out.PRDATA == 0) && (out.PSLVERR == 0) && (out.PREADY == 0))',c:'R',p:'0.00',d:'0',F:'1'}
+,{anchor:'cvg1652',cr:'m',items:[{s:'3',x:'FC',z:'((out.PRDATA == 0) && (out.PSLVERR == 0) && (out.PREADY == 0))',c:'R',p:'0.00',d:'0',F:'1'}
 ,{}
 ,{z:'(out.PRDATA == 0)',c:'r',r:'\'_0\' not hit',i:'Hit \'_0\''}
 ,{z:'(out.PSLVERR == 0)',c:'r',r:'\'_0\' not hit',i:'Hit \'_0\''}
@@ -234,33 +200,49 @@ c1605:[{dummy:0}
 ,{n:'5',z:'(out.PREADY == 0)_0',h1:'0',t:'c',c1:'((out.PRDATA == 0) && (out.PSLVERR == 0))'}
 ,{n:'6',z:'(out.PREADY == 0)_1',h1:'1',t:'c',c1:'((out.PRDATA == 0) && (out.PSLVERR == 0))'}
 ]}
-,{anchor:'cvg1645',cr:'m',items:[{s:'3',x:'FC',z:'(in.PWRITE && in.PSELX && in.PENABLE)',c:'R',p:'0.00',d:'0',F:'1'}
+,{anchor:'cvg1654',items:[{s:'3',x:'FC',z:'(in.PWRITE && in.PSELX && in.PENABLE && out.PREADY)',c:'Y',p:'50.00',d:'0',F:'1'}
 ,{}
-,{z:'in.PWRITE',c:'r',r:'No hits',i:'Hit \'_0\' and \'_1\''}
-,{z:'in.PSELX',c:'r',r:'No hits',i:'Hit \'_0\' and \'_1\''}
-,{z:'in.PENABLE',c:'r',r:'No hits',i:'Hit \'_0\' and \'_1\''}
+,{z:'in.PWRITE',c:'g',r:'',i:''}
+,{z:'in.PSELX',c:'r',r:'\'_0\' not hit',i:'Hit \'_0\''}
+,{z:'in.PENABLE',c:'r',r:'\'_0\' not hit',i:'Hit \'_0\''}
+,{z:'out.PREADY',c:'g',r:'',i:''}
 ,{}
-,{n:'1',z:'in.PWRITE_0',h1:'0',t:'c',c1:'-'}
-,{n:'2',z:'in.PWRITE_1',h1:'0',t:'c',c1:'(in.PSELX && in.PENABLE)'}
+,{n:'1',z:'in.PWRITE_0',h1:'1',t:'c',c1:'-'}
+,{n:'2',z:'in.PWRITE_1',h1:'1',t:'c',c1:'(in.PSELX && (in.PENABLE && out.PREADY))'}
 ,{n:'3',z:'in.PSELX_0',h1:'0',t:'c',c1:'in.PWRITE'}
-,{n:'4',z:'in.PSELX_1',h1:'0',t:'c',c1:'(in.PWRITE && in.PENABLE)'}
+,{n:'4',z:'in.PSELX_1',h1:'1',t:'c',c1:'(in.PWRITE && (in.PENABLE && out.PREADY))'}
 ,{n:'5',z:'in.PENABLE_0',h1:'0',t:'c',c1:'(in.PWRITE && in.PSELX)'}
-,{n:'6',z:'in.PENABLE_1',h1:'0',t:'c',c1:'(in.PWRITE && in.PSELX)'}
+,{n:'6',z:'in.PENABLE_1',h1:'1',t:'c',c1:'(in.PWRITE && in.PSELX && out.PREADY)'}
+,{n:'7',z:'out.PREADY_0',h1:'1',t:'c',c1:'(in.PWRITE && in.PSELX && in.PENABLE)'}
+,{n:'8',z:'out.PREADY_1',h1:'1',t:'c',c1:'(in.PWRITE && in.PSELX && in.PENABLE)'}
 ]}
-,{anchor:'cvg1647',cr:'m',items:[{s:'3',x:'FC',z:'(~in.PWRITE && in.PSELX && in.PENABLE)',c:'R',p:'0.00',d:'0',F:'1'}
+,{anchor:'cvg1656',items:[{s:'3',x:'FC',z:'(~in.PWRITE && in.PSELX && in.PENABLE && out.PREADY)',c:'Y',p:'50.00',d:'0',F:'1'}
 ,{}
-,{z:'in.PWRITE',c:'r',r:'\'_0\' not hit',i:'Hit \'_0\''}
-,{z:'in.PSELX',c:'r',r:'No hits',i:'Hit \'_0\' and \'_1\''}
-,{z:'in.PENABLE',c:'r',r:'No hits',i:'Hit \'_0\' and \'_1\''}
+,{z:'in.PWRITE',c:'g',r:'',i:''}
+,{z:'in.PSELX',c:'r',r:'\'_0\' not hit',i:'Hit \'_0\''}
+,{z:'in.PENABLE',c:'r',r:'\'_0\' not hit',i:'Hit \'_0\''}
+,{z:'out.PREADY',c:'g',r:'',i:''}
 ,{}
-,{n:'1',z:'in.PWRITE_0',h1:'0',t:'c',c1:'(in.PSELX && in.PENABLE)'}
+,{n:'1',z:'in.PWRITE_0',h1:'1',t:'c',c1:'(in.PSELX && (in.PENABLE && out.PREADY))'}
 ,{n:'2',z:'in.PWRITE_1',h1:'1',t:'c',c1:'-'}
 ,{n:'3',z:'in.PSELX_0',h1:'0',t:'c',c1:'~in.PWRITE'}
-,{n:'4',z:'in.PSELX_1',h1:'0',t:'c',c1:'(~in.PWRITE && in.PENABLE)'}
+,{n:'4',z:'in.PSELX_1',h1:'1',t:'c',c1:'(~in.PWRITE && (in.PENABLE && out.PREADY))'}
 ,{n:'5',z:'in.PENABLE_0',h1:'0',t:'c',c1:'(~in.PWRITE && in.PSELX)'}
-,{n:'6',z:'in.PENABLE_1',h1:'0',t:'c',c1:'(~in.PWRITE && in.PSELX)'}
+,{n:'6',z:'in.PENABLE_1',h1:'1',t:'c',c1:'(~in.PWRITE && in.PSELX && out.PREADY)'}
+,{n:'7',z:'out.PREADY_0',h1:'1',t:'c',c1:'(~in.PWRITE && in.PSELX && in.PENABLE)'}
+,{n:'8',z:'out.PREADY_1',h1:'1',t:'c',c1:'(~in.PWRITE && in.PSELX && in.PENABLE)'}
 ]}
-,{anchor:'cvg1649',cr:'m',items:[{s:'3',x:'FC',z:'((out.PSLVERR == 1) || (out.PRDATA === x))',c:'R',p:'0.00',d:'0',F:'1'}
+,{anchor:'cvg1658',cr:'m',items:[{s:'3',x:'FC',z:'((out.PRDATA === this.slave[in.PADDR]) && ~out.PSLVERR)',c:'R',p:'0.00',d:'0',F:'1'}
+,{}
+,{z:'(out.PRDATA === this.slave[in.PADDR])',c:'r',r:'\'_0\' not hit',i:'Hit \'_0\''}
+,{z:'out.PSLVERR',c:'r',r:'\'_1\' not hit',i:'Hit \'_1\''}
+,{}
+,{n:'1',z:'(out.PRDATA === this.slave[in.PADDR])_0',h1:'0',t:'c',c1:'-'}
+,{n:'2',z:'(out.PRDATA === this.slave[in.PADDR])_1',h1:'1',t:'c',c1:'~out.PSLVERR'}
+,{n:'3',z:'out.PSLVERR_0',h1:'1',t:'c',c1:'(out.PRDATA === this.slave[in.PADDR])'}
+,{n:'4',z:'out.PSLVERR_1',h1:'0',t:'c',c1:'(out.PRDATA === this.slave[in.PADDR])'}
+]}
+,{anchor:'cvg1660',cr:'m',items:[{s:'3',x:'FC',z:'((out.PSLVERR == 1) || (out.PRDATA === x))',c:'R',p:'0.00',d:'0',F:'1'}
 ,{}
 ,{z:'(out.PSLVERR == 1)',c:'r',r:'No hits',i:'Hit \'_0\' and \'_1\''}
 ,{z:'(out.PRDATA === x)',c:'r',r:'No hits',i:'Hit \'_0\' and \'_1\''}

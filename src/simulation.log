@@ -1,6 +1,7 @@
 # vsim -vopt work.top -voptargs="+acc=npr" -assertdebug -l simulation.log -coverage -c -do "coverage save -onexit -assert -directive -cvg -codeAll coverage.ucdb; run -all; exit" 
-# Start time: 21:58:51 on Dec 01,2025
+# Start time: 23:31:35 on Dec 02,2025
 # ** Note: (vsim-3812) Design is being optimized...
+# ** Note: (vopt-143) Recognized 1 FSM in module "apb_slave(fast)".
 # //  Questa Sim
 # //  Version 10.6c linux Jul 25 2017
 # //
@@ -89,36 +90,55 @@
 #       cov_passive_mon_port    uvm_analysis_imp_passive_mon_cg   -     @530 
 # ---------------------------------------------------------------------------
 # 
-# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 35][0m PRESETN = 0 | PSELX = 1 | PREADY = 0 | PRDATA = 0 | PSLVERR = 0 
-# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 35][0m ---------------------------------------
-# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 35][0m ----           TEST PASS           ----
-# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 35][0m ---------------------------------------
-# [1;31m[ERROR] [0m [1;36m(ID=APB_DRV)[0m [1;34m[time = 155][0m PREADY timeout (>1000 cycles) - aborting transaction
-# [1;31m[ERROR] [0m [1;36m(ID=APB_DRV)[0m [1;34m[time = 285][0m PREADY timeout (>1000 cycles) - aborting transaction
-# [1;32m[INFO] [0m [1;36m(ID=TEST_DONE)[0m [1;34m[time = 295][0m 'run' phase is ready to proceed to the 'extract' phase
-# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 295][0m TOTAL PASS : 1
-# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 295][0m TOTAL FAIL : 0
-# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 295][0m TOTAL CASES : 1
-# [1;32m[INFO] [0m [1;36m(ID=apb_master_subscriber)[0m [1;34m[time = 295][0m [ACTIVE_MONITOR] Coverage ------> 25.00%,
-# [1;32m[INFO] [0m [1;36m(ID=apb_master_subscriber)[0m [1;34m[time = 295][0m [PASSIVE_MONITOR] Coverage ------> 33.46%
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 5][0m PRESETN = 0 | PSELX = 0 | PREADY = 0 | PRDATA = 0 | PSLVERR = 0 
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 5][0m ---------------------------------------
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 5][0m ----           TEST PASS           ----
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 5][0m ---------------------------------------
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 15][0m PRESETN = 0 | PSELX = 1 | PREADY = 0 | PRDATA = 0 | PSLVERR = 0 
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 15][0m ---------------------------------------
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 15][0m ----           TEST PASS           ----
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 15][0m ---------------------------------------
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 35][0m WRITE TRANSFER
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 35][0m  PRESETN = 1 | PSELX = 1 | PWRITE = 1 | PENABLE = 1 | PREADY = 1 | PRDATA = 0 | PSLVERR = 0 
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 35][0m data strored at slave[  6] =  25 
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 75][0m WRITE TRANSFER
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 75][0m  PRESETN = 1 | PSELX = 1 | PWRITE = 1 | PENABLE = 1 | PREADY = 1 | PRDATA = 0 | PSLVERR = 0 
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 75][0m data strored at slave[  4] =  50 
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 115][0m READ TRANSFER
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 115][0m  PRESETN = 1 | PSELX = 1 | PWRITE = 0 | PENABLE = 1 | PREADY = 1 | PRDATA = 25 | PSLVERR = 0 
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 115][0m data stored at slave[  6] =  25 
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 115][0m ---------------------------------------
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 115][0m ----           TEST PASS           ----
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 115][0m ---------------------------------------
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 155][0m READ TRANSFER
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 155][0m  PRESETN = 1 | PSELX = 1 | PWRITE = 0 | PENABLE = 1 | PREADY = 1 | PRDATA = 50 | PSLVERR = 0 
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 155][0m data stored at slave[  4] =  50 
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 155][0m ---------------------------------------
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 155][0m ----           TEST PASS           ----
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 155][0m ---------------------------------------
+# [1;32m[INFO] [0m [1;36m(ID=TEST_DONE)[0m [1;34m[time = 165][0m 'run' phase is ready to proceed to the 'extract' phase
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 165][0m TOTAL PASS : 4
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 165][0m TOTAL FAIL : 0
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 165][0m TOTAL CASES : 4
+# [1;32m[INFO] [0m [1;36m(ID=apb_master_subscriber)[0m [1;34m[time = 165][0m [ACTIVE_MONITOR] Coverage ------> 58.72%,
+# [1;32m[INFO] [0m [1;36m(ID=apb_master_subscriber)[0m [1;34m[time = 165][0m [PASSIVE_MONITOR] Coverage ------> 50.39%
 # 
 # --- UVM Report Summary ---
 # 
 # ** Report counts by severity
-# UVM_INFO :   14
+# UVM_INFO :   36
 # UVM_WARNING :    0
-# UVM_ERROR :    2
+# UVM_ERROR :    0
 # UVM_FATAL :    0
 # ** Report counts by id
-# [APB_DRV]     2
 # [Questa UVM]     2
 # [RNTST]     1
-# [SCOREBOARD]     7
+# [SCOREBOARD]    29
 # [TEST_DONE]     1
 # [UVMTOP]     1
 # [apb_master_subscriber]     2
 # ** Note: $finish    : /tools/mentor/questasim_10.6c/questasim/linux/../verilog_src/uvm-1.1d/src/base/uvm_root.svh(430)
-#    Time: 295 ns  Iteration: 66  Instance: /top
+#    Time: 165 ns  Iteration: 68  Instance: /top
 # Saving coverage database on exit...
-# End time: 21:58:55 on Dec 01,2025, Elapsed time: 0:00:04
+# End time: 23:31:39 on Dec 02,2025, Elapsed time: 0:00:04
 # Errors: 0, Warnings: 4

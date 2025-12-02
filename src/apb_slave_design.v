@@ -115,7 +115,7 @@ module apb_slave #(
 
 endmodule
 */
-
+/*
 module apb_slave (
     input         PCLK,      // Peripheral Clock
     input         PRESETn,   // Active Low Reset
@@ -183,4 +183,72 @@ module apb_slave (
       end
     end
   end
+endmodule
+
+*/
+
+
+module apb_slave #(parameter ADDR_WIDTH = 8, WIDTH = 8)
+(
+  input                        clk,
+  input                        rst_n,
+  input        [ADDR_WIDTH-1:0]paddr,
+  input                        pwrite,
+  input                        psel,
+  input                        penable,
+  input        [WIDTH-1:0]     pwdata,
+  input         [3:0]          pstrb,
+  output logic [WIDTH-1:0]     prdata,
+  output logic                 pready, 
+  output logic                 pslverr
+);
+ 
+ //pslverr = 0 ;
+ logic [WIDTH-1:0] mem [2**ADDR_WIDTH-1:0];
+
+ typedef enum logic [1:0] {IDLE, SETUP, ACCESS} state_t;
+ state_t present_state, next_state;
+
+ // State Register
+ always_ff @(posedge clk or negedge rst_n) begin
+  if (!rst_n)
+   present_state <= IDLE;
+  else
+   present_state <= next_state;
+ end
+
+ // Next State and Output Logic
+ always_comb begin
+  // Default values
+  next_state = IDLE;
+  pready = 1'b0;
+  prdata = '0;
+  pslverr = 0 ;
+  case (present_state)
+   IDLE: begin
+    if (psel)
+     next_state = SETUP;
+    else
+     next_state = IDLE;
+   end
+   SETUP: begin
+    pready = 1'b0;
+    if (penable)
+     next_state = ACCESS;
+    else
+     next_state = SETUP;
+   end
+   ACCESS: begin
+    pready = 1'b1;
+    if(pwrite) begin
+     mem[paddr] = pwdata;
+    end else begin
+     prdata = mem[paddr];
+    end
+    next_state = IDLE;
+   end
+   default: next_state = IDLE;
+  endcase
+ end
+
 endmodule

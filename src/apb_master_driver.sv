@@ -29,7 +29,6 @@ class apb_master_driver extends uvm_driver#(apb_master_sequence_item);
 	//------------------------------------------------------//
 
 	task run_phase(uvm_phase phase);
-		repeat(3) @(vif.apb_master_driver_cb);
 		forever begin  
 			seq_item_port.get_next_item(req);
 			apb_master_driver_code();   
@@ -55,10 +54,14 @@ class apb_master_driver extends uvm_driver#(apb_master_sequence_item);
 	//------------------------------------------------------//
 
 	task idle_state();
+		repeat(1) @(vif.apb_master_driver_cb);
 		vif.apb_master_driver_cb.PSELX   <= req.PSELX; 
 		vif.apb_master_driver_cb.PRESETN <= req.PRESETN; 
 		vif.apb_master_driver_cb.PENABLE <= 'b0;
-		@(vif.apb_master_driver_cb);
+		// `uvm_info( "Driver" , $sformatf( " PRESETN = %0B | PSELX = %0B | PWRITE = %0B | PENABLE = %0B  ", req.PRESETN , req.PSELX , req.PWRITE , req.PENABLE ) , UVM_NONE )
+		// `uvm_info( "Driver" , $sformatf(" data strored at slave[%d] = %d " , req.PADDR, req.PWDATA ) , UVM_NONE )
+
+
 	endtask
 
 	//------------------------------------------------------//
@@ -66,22 +69,34 @@ class apb_master_driver extends uvm_driver#(apb_master_sequence_item);
 	//------------------------------------------------------//
 
 	task setup_state();
+		@(vif.apb_master_driver_cb);
 		vif.apb_master_driver_cb.PSELX   <=  req.PSELX; 
 		vif.apb_master_driver_cb.PRESETN <=  req.PRESETN; 
 		vif.apb_master_driver_cb.PENABLE <= 'b0;
 		vif.apb_master_driver_cb.PADDR   <=  req.PADDR;
 		vif.apb_master_driver_cb.PWRITE  <=  req.PWRITE;
 		vif.apb_master_driver_cb.PWDATA  <=  req.PWDATA;
-		@(vif.apb_master_driver_cb);
+		// `uvm_info( "Driver" ,
+		//				$sformatf( " PRESETN = %0B | PSELX = %0B | PWRITE = %0B | PENABLE = %0B ",
+		//                        req.PRESETN , req.PSELX , req.PWRITE , req.PENABLE ),  UVM_NONE )
+		//`uvm_info( "Driver" , $sformatf("data strored at slave[%d] = %d " , req.PADDR, req.PWDATA ) , UVM_NONE )
 	endtask
 
 	//------------------------------------------------------//
 	//           Driver code for access state               //  
 	//------------------------------------------------------//
 
-	task access_state();  
+	task access_state();
+		@(vif.apb_master_driver_cb);
 		vif.apb_master_driver_cb.PENABLE <= 'b1;
 		wait_state_detection();
+		// `uvm_info( "Driver" ,
+		//			$sformatf( " PRESETN = %0B | PSELX = %0B | PWRITE = %0B | PENABLE = %0B ",
+		//                       req.PRESETN , req.PSELX , req.PWRITE , req.PENABLE ),  UVM_NONE )
+		//`uvm_info( "Driver" , $sformatf("data strored at slave[%d] = %d " , req.PADDR, req.PWDATA ) , UVM_NONE )
+
+		vif.apb_master_driver_cb.PSELX <= 0;
+		vif.apb_master_driver_cb.PENABLE <= 0;
 	endtask
 
 	//------------------------------------------------------//
@@ -89,16 +104,8 @@ class apb_master_driver extends uvm_driver#(apb_master_sequence_item);
 	//------------------------------------------------------//
 
 	task wait_state_detection();
-		int cycle_cnt = 0;
-		do begin
+		while (!vif.apb_master_driver_cb.PREADY)
 			@(vif.apb_master_driver_cb);
-			cycle_cnt++;
-			if (cycle_cnt > 10) begin
-				`uvm_error("APB_DRV","PREADY timeout (>1000 cycles) - aborting transaction")
-				break;
-			end
-		end while (!vif.apb_master_driver_cb.PREADY);
-
 		@(vif.apb_master_driver_cb);
 	endtask
 
