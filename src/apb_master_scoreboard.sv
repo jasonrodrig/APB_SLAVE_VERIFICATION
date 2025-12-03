@@ -32,7 +32,7 @@ class apb_master_scoreboard extends uvm_scoreboard;
 	endfunction: write_active_mon_scb
 
 	function void write_passive_mon_scb(apb_master_sequence_item pkt);
-	  //`uvm_info("SCOREBOARD", "Received output packet ", UVM_MEDIUM)
+		//`uvm_info("SCOREBOARD", "Received output packet ", UVM_MEDIUM)
 		passive_mon_packet_q.push_back(pkt);
 	endfunction: write_passive_mon_scb
 
@@ -65,6 +65,10 @@ class apb_master_scoreboard extends uvm_scoreboard;
 	// comparision logic
 	task compare(apb_master_sequence_item in , apb_master_sequence_item out );
 
+		logic [ `DATA_WIDTH - 1 : 0 ] old_data ;
+		logic [ `DATA_WIDTH - 1 : 0 ] new_data ;
+		logic [ `DATA_WIDTH - 1 : 0 ] expected ;
+
 		//IDLE STATE SIGNALS CHECK
 
 		if( !in.PRESETN || !in.PSELX ) begin
@@ -96,12 +100,31 @@ class apb_master_scoreboard extends uvm_scoreboard;
 
 			if( in.PWRITE && in.PSELX && in.PENABLE && out.PREADY )
 			begin
-				slave[in.PADDR] = in.PWDATA;
+
+				old_data = slave[in.PADDR];
+
 				`uvm_info( "SCOREBOARD", "WRITE TRANSFER",UVM_NONE)
 				`uvm_info( "SCOREBOARD" ,
-					$sformatf( " PRESETN = %0B | PSELX = %0B | PWRITE = %0B | PENABLE = %0B | PREADY = %0B | PRDATA = %0D | PSLVERR = %0B ",
-						in.PRESETN , in.PSELX , in.PWRITE , in.PENABLE , out.PREADY , out.PRDATA , out.PSLVERR  ) , UVM_NONE )
+					$sformatf( " PRESETN = %0B | PSELX = %0B | PWRITE = %0B | PENABLE = %0B | PSTRB = %0D | PREADY = %0B | PRDATA = %0D | PSLVERR = %0B ",
+						in.PRESETN , in.PSELX , in.PWRITE , in.PENABLE , in.PSTRB , out.PREADY , out.PRDATA , out.PSLVERR  ) , UVM_NONE )
 				`uvm_info( "SCOREBOARD" , $sformatf("data strored at slave[%d] = %d " , in.PADDR, in.PWDATA ) , UVM_NONE )
+
+				// pstrb = 0 then perform full word write transfer
+				if(in.PSTRB == 0) 
+				begin
+					slave[in.PADDR] = in.PWDATA;
+				end
+
+				// pstrb = 1 then perform partial word write transfer
+				else
+				begin
+					// pstrb write logic
+					pstrb_write(in.PWDATA , in.PSTRB , old_data , new_data);
+					slave[in.PADDR] = new_data;
+					`uvm_info("SCOREBOARD", 
+						$sformatf( " PSTRB WRITE: ADDR = %0D | PSTRB = %0D | OLD_DATA = %0D | NEW_DATA = %0D ", 
+							in.PADDR , in.PSTRB , old_data , new_data ) , UVM_NONE )
+				end
 			end
 
 			// read operation
@@ -110,9 +133,10 @@ class apb_master_scoreboard extends uvm_scoreboard;
 			begin
 				`uvm_info( "SCOREBOARD", "READ TRANSFER",UVM_NONE)
 				`uvm_info( "SCOREBOARD" ,
-					$sformatf( " PRESETN = %0B | PSELX = %0B | PWRITE = %0B | PENABLE = %0B | PREADY = %0B | PRDATA = %0D | PSLVERR = %0B ",
-						in.PRESETN , in.PSELX , in.PWRITE , in.PENABLE , out.PREADY , out.PRDATA , out.PSLVERR  ) , UVM_NONE )
+					$sformatf( " PRESETN = %0B | PSELX = %0B | PWRITE = %0B | PENABLE = %0B | PSTRB = %0D | PREADY = %0B | PRDATA = %0D | PSLVERR = %0B ",
+						in.PRESETN , in.PSELX , in.PWRITE , in.PENABLE , in.PSTRB , out.PREADY , out.PRDATA , out.PSLVERR  ) , UVM_NONE )
 				`uvm_info( "SCOREBOARD" , $sformatf("data stored at slave[%d] = %d " , in.PADDR, out.PRDATA ) , UVM_NONE )
+
 
 				if( out.PRDATA === slave[in.PADDR] && !out.PSLVERR)
 				begin
@@ -154,7 +178,22 @@ class apb_master_scoreboard extends uvm_scoreboard;
 					fail_count++;
 				end
 			end
+		end
+	endtask
 
+	// write pstrb operation 
+	task pstrb_write(
+		input logic [ `DATA_WIDTH - 1 : 0 ] pwdata,
+		input bit   [ ( `DATA_WIDTH / 8 ) - 1 : 0 ] pstrb,
+		input logic [ `DATA_WIDTH - 1 : 0 ] old_data,
+		output logic [ `DATA_WIDTH - 1 : 0 ] new_data );
+
+		new_data = old_data;
+
+		for (int i = 0; i < 4; i++) begin
+			if (pstrb[i]) begin
+				new_data[i*8 +: 8] = pwdata[i*8 +: 8];
+			end
 		end
 	endtask
 

@@ -42,4 +42,12 @@ class apb_master_sequence_item extends uvm_sequence_item;
 		super.new(name);
 	endfunction
 
+	//--------------------------------------------------------//
+	// Constraning PSTRB = 0 when read transfer takes place   //  
+	//--------------------------------------------------------//
+
+  constraint read_transfer_disable_pstrb{ 
+			if(!PWRITE) PSTRB == 0; 
+  }
+
 endclass

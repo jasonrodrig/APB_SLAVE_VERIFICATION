@@ -66,6 +66,7 @@ class write_transfer extends uvm_sequence#(apb_master_sequence_item);
 				 req.PRESETN == 1;
 				 req.PSELX ==	1;
 				 req.PWRITE == 1;
+				 req.PSTRB == 0;
 				 req.PADDR == 6;
 				 req.PWDATA == 25;
 				}
@@ -76,6 +77,7 @@ class write_transfer extends uvm_sequence#(apb_master_sequence_item);
 				 req.PRESETN == 1;
 				 req.PSELX ==	1;
 				 req.PWRITE == 1;
+				 req.PSTRB == 0;	
 				 req.PADDR == 4;
 				 req.PWDATA == 50;
 				}
@@ -103,6 +105,7 @@ class read_transfer extends uvm_sequence#(apb_master_sequence_item);
 				 req.PRESETN == 1;
 				 req.PSELX ==	1;
 				 req.PWRITE == 0;
+				 req.PSTRB == 0;
 				 req.PADDR == 6;
 				 //req.PDATA inside {[0:255]};
 				}
@@ -112,6 +115,7 @@ class read_transfer extends uvm_sequence#(apb_master_sequence_item);
 				{ 
 				 req.PRESETN == 1;
 				 req.PSELX == 1; 
+				 req.PSTRB == 0;
 				 req.PWRITE == 0;
 				 req.PADDR == 4;
 				 //req.PDATA inside {[0:255]};
@@ -573,7 +577,7 @@ endclass
 class apb_master_regression extends uvm_sequence#(apb_master_sequence_item);
 	`uvm_object_utils(apb_master_regression)
 
-	presetn                   seq0;
+	  presetn                   seq0;
     write_transfer            seq1;
     read_transfer             seq2;
 /*	
@@ -602,8 +606,8 @@ class apb_master_regression extends uvm_sequence#(apb_master_sequence_item);
 	task body();
     `uvm_do(seq0)
   	`uvm_do(seq1)
-   // `uvm_do(seq0)
-    `uvm_do(seq2) 
+    `uvm_do(seq2)
+   // `uvm_do(seq0) 
    // `uvm_do(seq0)
 /*	`uvm_do(seq3)         
 		`uvm_do(seq4)

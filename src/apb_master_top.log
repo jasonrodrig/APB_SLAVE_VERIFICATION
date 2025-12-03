@@ -1,5 +1,5 @@
 QuestaSim vlog 10.6c Compiler 2017.07 Jul 25 2017
-Start time: 14:30:18 on Dec 03,2025
+Start time: 21:53:27 on Dec 03,2025
 vlog -sv "+acc" "+cover" "+fcover" -l apb_master_top.log apb_master_top.sv 
 -- Compiling module apb_slave
 -- Compiling interface apb_master_interface
@@ -14,5 +14,5 @@ vlog -sv "+acc" "+cover" "+fcover" -l apb_master_top.log apb_master_top.sv
 
 Top level modules:
 	top
-End time: 14:30:18 on Dec 03,2025, Elapsed time: 0:00:00
+End time: 21:53:28 on Dec 03,2025, Elapsed time: 0:00:01
 Errors: 0, Warnings: 0

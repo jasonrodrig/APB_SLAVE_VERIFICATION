@@ -1,5 +1,5 @@
 # vsim -vopt work.top -voptargs="+acc=npr" -assertdebug -l simulation.log -coverage -c -do "coverage save -onexit -assert -directive -cvg -codeAll coverage.ucdb; run -all; exit" 
-# Start time: 14:30:19 on Dec 03,2025
+# Start time: 21:53:29 on Dec 03,2025
 # ** Note: (vsim-3812) Design is being optimized...
 # ** Note: (vopt-143) Recognized 1 FSM in module "apb_slave(fast)".
 # //  Questa Sim
@@ -91,19 +91,19 @@
 # [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 15][0m ----           TEST PASS           ----
 # [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 15][0m ---------------------------------------
 # [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 35][0m WRITE TRANSFER
-# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 35][0m  PRESETN = 1 | PSELX = 1 | PWRITE = 1 | PENABLE = 1 | PREADY = 1 | PRDATA = 0 | PSLVERR = 0 
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 35][0m  PRESETN = 1 | PSELX = 1 | PWRITE = 1 | PENABLE = 1 | PSTRB = 0 | PREADY = 1 | PRDATA = 0 | PSLVERR = 0 
 # [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 35][0m data strored at slave[  6] =  25 
 # [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 75][0m WRITE TRANSFER
-# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 75][0m  PRESETN = 1 | PSELX = 1 | PWRITE = 1 | PENABLE = 1 | PREADY = 1 | PRDATA = 0 | PSLVERR = 0 
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 75][0m  PRESETN = 1 | PSELX = 1 | PWRITE = 1 | PENABLE = 1 | PSTRB = 0 | PREADY = 1 | PRDATA = 0 | PSLVERR = 0 
 # [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 75][0m data strored at slave[  4] =  50 
 # [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 115][0m READ TRANSFER
-# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 115][0m  PRESETN = 1 | PSELX = 1 | PWRITE = 0 | PENABLE = 1 | PREADY = 1 | PRDATA = 25 | PSLVERR = 0 
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 115][0m  PRESETN = 1 | PSELX = 1 | PWRITE = 0 | PENABLE = 1 | PSTRB = 0 | PREADY = 1 | PRDATA = 25 | PSLVERR = 0 
 # [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 115][0m data stored at slave[  6] =  25 
 # [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 115][0m ---------------------------------------
 # [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 115][0m ----           TEST PASS           ----
 # [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 115][0m ---------------------------------------
 # [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 155][0m READ TRANSFER
-# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 155][0m  PRESETN = 1 | PSELX = 1 | PWRITE = 0 | PENABLE = 1 | PREADY = 1 | PRDATA = 50 | PSLVERR = 0 
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 155][0m  PRESETN = 1 | PSELX = 1 | PWRITE = 0 | PENABLE = 1 | PSTRB = 0 | PREADY = 1 | PRDATA = 50 | PSLVERR = 0 
 # [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 155][0m data stored at slave[  4] =  50 
 # [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 155][0m ---------------------------------------
 # [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 155][0m ----           TEST PASS           ----
@@ -132,5 +132,5 @@
 # ** Note: $finish    : /tools/mentor/questasim_10.6c/questasim/linux/../verilog_src/uvm-1.1d/src/base/uvm_root.svh(430)
 #    Time: 165 ns  Iteration: 68  Instance: /top
 # Saving coverage database on exit...
-# End time: 14:30:23 on Dec 03,2025, Elapsed time: 0:00:04
+# End time: 21:53:33 on Dec 03,2025, Elapsed time: 0:00:04
 # Errors: 0, Warnings: 0
