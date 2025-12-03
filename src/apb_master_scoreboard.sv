@@ -155,7 +155,7 @@ class apb_master_scoreboard extends uvm_scoreboard;
 			end
 
 			//slave error check
-			if( in.PADDR > ( 2 ** `ADDR_WIDTH ) - 1 )
+	    if( in.PADDR > 192 )
 			begin
 				`uvm_info( "SCOREBOARD", "SLAVE ERROR CHECK",UVM_NONE)
 				`uvm_info( "SCOREBOARD" ,

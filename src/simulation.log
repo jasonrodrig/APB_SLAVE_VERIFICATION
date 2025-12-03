@@ -1,7 +1,6 @@
 # vsim -vopt work.top -voptargs="+acc=npr" -assertdebug -l simulation.log -coverage -c -do "coverage save -onexit -assert -directive -cvg -codeAll coverage.ucdb; run -all; exit" 
-# Start time: 21:53:29 on Dec 03,2025
+# Start time: 00:26:09 on Dec 04,2025
 # ** Note: (vsim-3812) Design is being optimized...
-# ** Note: (vopt-143) Recognized 1 FSM in module "apb_slave(fast)".
 # //  Questa Sim
 # //  Version 10.6c linux Jul 25 2017
 # //
@@ -52,6 +51,9 @@
 # UVM_INFO verilog_src/questa_uvm_pkg-1.2/src/questa_uvm_pkg.sv(215) @ 0: reporter [Questa UVM] QUESTA_UVM-1.2.3
 # UVM_INFO verilog_src/questa_uvm_pkg-1.2/src/questa_uvm_pkg.sv(217) @ 0: reporter [Questa UVM]  questa_uvm::init(+struct)
 # UVM_INFO @ 0: reporter [RNTST] Running test apb_master_regression_test...
+# 
+# 
+#  Design Entered reset
 # [1;32m[INFO] [0m [1;36m(ID=UVMTOP)[0m [1;34m[time = 0][0m UVM testbench topology:
 # ---------------------------------------------------------------------------
 # Name                          Type                              Size  Value
@@ -82,55 +84,180 @@
 #       cov_passive_mon_port    uvm_analysis_imp_passive_mon_cg   -     @530 
 # ---------------------------------------------------------------------------
 # 
+# 
+# 
+#  Design Entered reset
 # [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 5][0m PRESETN = 0 | PSELX = 0 | PREADY = 0 | PRDATA = 0 | PSLVERR = 0 
 # [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 5][0m ---------------------------------------
 # [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 5][0m ----           TEST PASS           ----
 # [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 5][0m ---------------------------------------
+# 
+# 
+#  Design Entered reset
 # [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 15][0m PRESETN = 0 | PSELX = 1 | PREADY = 0 | PRDATA = 0 | PSLVERR = 0 
 # [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 15][0m ---------------------------------------
 # [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 15][0m ----           TEST PASS           ----
 # [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 15][0m ---------------------------------------
-# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 35][0m WRITE TRANSFER
-# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 35][0m  PRESETN = 1 | PSELX = 1 | PWRITE = 1 | PENABLE = 1 | PSTRB = 0 | PREADY = 1 | PRDATA = 0 | PSLVERR = 0 
-# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 35][0m data strored at slave[  6] =  25 
 # [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 75][0m WRITE TRANSFER
 # [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 75][0m  PRESETN = 1 | PSELX = 1 | PWRITE = 1 | PENABLE = 1 | PSTRB = 0 | PREADY = 1 | PRDATA = 0 | PSLVERR = 0 
-# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 75][0m data strored at slave[  4] =  50 
-# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 115][0m READ TRANSFER
-# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 115][0m  PRESETN = 1 | PSELX = 1 | PWRITE = 0 | PENABLE = 1 | PSTRB = 0 | PREADY = 1 | PRDATA = 25 | PSLVERR = 0 
-# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 115][0m data stored at slave[  6] =  25 
-# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 115][0m ---------------------------------------
-# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 115][0m ----           TEST PASS           ----
-# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 115][0m ---------------------------------------
-# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 155][0m READ TRANSFER
-# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 155][0m  PRESETN = 1 | PSELX = 1 | PWRITE = 0 | PENABLE = 1 | PSTRB = 0 | PREADY = 1 | PRDATA = 50 | PSLVERR = 0 
-# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 155][0m data stored at slave[  4] =  50 
-# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 155][0m ---------------------------------------
-# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 155][0m ----           TEST PASS           ----
-# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 155][0m ---------------------------------------
-# [1;32m[INFO] [0m [1;36m(ID=TEST_DONE)[0m [1;34m[time = 165][0m 'run' phase is ready to proceed to the 'extract' phase
-# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 165][0m TOTAL PASS : 4
-# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 165][0m TOTAL FAIL : 0
-# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 165][0m TOTAL CASES : 4
-# [1;32m[INFO] [0m [1;36m(ID=apb_master_subscriber)[0m [1;34m[time = 165][0m [ACTIVE_MONITOR] Coverage ------> 58.72%,
-# [1;32m[INFO] [0m [1;36m(ID=apb_master_subscriber)[0m [1;34m[time = 165][0m [PASSIVE_MONITOR] Coverage ------> 50.39%
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 75][0m data strored at slave[ 23] =  70 
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 125][0m WRITE TRANSFER
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 125][0m  PRESETN = 1 | PSELX = 1 | PWRITE = 1 | PENABLE = 1 | PSTRB = 0 | PREADY = 1 | PRDATA = 0 | PSLVERR = 0 
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 125][0m data strored at slave[ 63] = 207 
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 175][0m WRITE TRANSFER
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 175][0m  PRESETN = 1 | PSELX = 1 | PWRITE = 1 | PENABLE = 1 | PSTRB = 0 | PREADY = 1 | PRDATA = 0 | PSLVERR = 0 
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 175][0m data strored at slave[ 50] = 195 
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 225][0m READ TRANSFER
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 225][0m  PRESETN = 1 | PSELX = 1 | PWRITE = 0 | PENABLE = 1 | PSTRB = 0 | PREADY = 1 | PRDATA = 70 | PSLVERR = 0 
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 225][0m data stored at slave[ 23] =  70 
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 225][0m ---------------------------------------
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 225][0m ----           TEST PASS           ----
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 225][0m ---------------------------------------
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 275][0m READ TRANSFER
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 275][0m  PRESETN = 1 | PSELX = 1 | PWRITE = 0 | PENABLE = 1 | PSTRB = 0 | PREADY = 1 | PRDATA = 207 | PSLVERR = 0 
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 275][0m data stored at slave[ 63] = 207 
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 275][0m ---------------------------------------
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 275][0m ----           TEST PASS           ----
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 275][0m ---------------------------------------
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 325][0m READ TRANSFER
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 325][0m  PRESETN = 1 | PSELX = 1 | PWRITE = 0 | PENABLE = 1 | PSTRB = 0 | PREADY = 1 | PRDATA = 195 | PSLVERR = 0 
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 325][0m data stored at slave[ 50] = 195 
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 325][0m ---------------------------------------
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 325][0m ----           TEST PASS           ----
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 325][0m ---------------------------------------
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 375][0m WRITE TRANSFER
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 375][0m  PRESETN = 1 | PSELX = 1 | PWRITE = 1 | PENABLE = 1 | PSTRB = 0 | PREADY = 1 | PRDATA = 195 | PSLVERR = 0 
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 375][0m data strored at slave[ 39] = 136 
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 425][0m READ TRANSFER
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 425][0m  PRESETN = 1 | PSELX = 1 | PWRITE = 0 | PENABLE = 1 | PSTRB = 0 | PREADY = 1 | PRDATA = 136 | PSLVERR = 0 
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 425][0m data stored at slave[ 39] = 136 
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 425][0m ---------------------------------------
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 425][0m ----           TEST PASS           ----
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 425][0m ---------------------------------------
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 475][0m WRITE TRANSFER
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 475][0m  PRESETN = 1 | PSELX = 1 | PWRITE = 1 | PENABLE = 1 | PSTRB = 0 | PREADY = 1 | PRDATA = 136 | PSLVERR = 0 
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 475][0m data strored at slave[ 52] =  90 
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 525][0m READ TRANSFER
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 525][0m  PRESETN = 1 | PSELX = 1 | PWRITE = 0 | PENABLE = 1 | PSTRB = 0 | PREADY = 1 | PRDATA = 90 | PSLVERR = 0 
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 525][0m data stored at slave[ 52] =  90 
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 525][0m ---------------------------------------
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 525][0m ----           TEST PASS           ----
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 525][0m ---------------------------------------
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 575][0m WRITE TRANSFER
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 575][0m  PRESETN = 1 | PSELX = 1 | PWRITE = 1 | PENABLE = 1 | PSTRB = 0 | PREADY = 1 | PRDATA = 90 | PSLVERR = 0 
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 575][0m data strored at slave[  2] =  32 
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 625][0m READ TRANSFER
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 625][0m  PRESETN = 1 | PSELX = 1 | PWRITE = 0 | PENABLE = 1 | PSTRB = 0 | PREADY = 1 | PRDATA = 32 | PSLVERR = 0 
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 625][0m data stored at slave[  2] =  32 
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 625][0m ---------------------------------------
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 625][0m ----           TEST PASS           ----
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 625][0m ---------------------------------------
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 675][0m WRITE TRANSFER
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 675][0m  PRESETN = 1 | PSELX = 1 | PWRITE = 1 | PENABLE = 1 | PSTRB = 0 | PREADY = 1 | PRDATA = 32 | PSLVERR = 0 
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 675][0m data strored at slave[ 51] = 226 
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 725][0m READ TRANSFER
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 725][0m  PRESETN = 1 | PSELX = 1 | PWRITE = 0 | PENABLE = 1 | PSTRB = 0 | PREADY = 1 | PRDATA = 226 | PSLVERR = 0 
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 725][0m data stored at slave[ 51] = 226 
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 725][0m ---------------------------------------
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 725][0m ----           TEST PASS           ----
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 725][0m ---------------------------------------
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 775][0m WRITE TRANSFER
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 775][0m  PRESETN = 1 | PSELX = 1 | PWRITE = 1 | PENABLE = 1 | PSTRB = 0 | PREADY = 1 | PRDATA = 226 | PSLVERR = 0 
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 775][0m data strored at slave[  0] = 199 
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 825][0m READ TRANSFER
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 825][0m  PRESETN = 1 | PSELX = 1 | PWRITE = 0 | PENABLE = 1 | PSTRB = 0 | PREADY = 1 | PRDATA = 199 | PSLVERR = 0 
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 825][0m data stored at slave[  0] = 199 
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 825][0m ---------------------------------------
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 825][0m ----           TEST PASS           ----
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 825][0m ---------------------------------------
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 875][0m WRITE TRANSFER
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 875][0m  PRESETN = 1 | PSELX = 1 | PWRITE = 1 | PENABLE = 1 | PSTRB = 0 | PREADY = 1 | PRDATA = 199 | PSLVERR = 0 
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 875][0m data strored at slave[  4] =   8 
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 925][0m WRITE TRANSFER
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 925][0m  PRESETN = 1 | PSELX = 1 | PWRITE = 1 | PENABLE = 1 | PSTRB = 0 | PREADY = 1 | PRDATA = 199 | PSLVERR = 0 
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 925][0m data strored at slave[ 56] = 175 
+# 
+# 
+#  Design Entered reset
+# 
+# 
+#  Design Entered reset
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 955][0m PRESETN = 0 | PSELX = 0 | PREADY = 0 | PRDATA = 0 | PSLVERR = 0 
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 955][0m ---------------------------------------
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 955][0m ----           TEST PASS           ----
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 955][0m ---------------------------------------
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 1015][0m WRITE TRANSFER
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 1015][0m  PRESETN = 1 | PSELX = 1 | PWRITE = 1 | PENABLE = 1 | PSTRB = 0 | PREADY = 1 | PRDATA = 0 | PSLVERR = 0 
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 1015][0m data strored at slave[  4] = 194 
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 1065][0m WRITE TRANSFER
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 1065][0m  PRESETN = 1 | PSELX = 1 | PWRITE = 1 | PENABLE = 1 | PSTRB = 0 | PREADY = 1 | PRDATA = 0 | PSLVERR = 0 
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 1065][0m data strored at slave[ 58] =  96 
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 1115][0m READ TRANSFER
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 1115][0m  PRESETN = 1 | PSELX = 1 | PWRITE = 0 | PENABLE = 1 | PSTRB = 0 | PREADY = 1 | PRDATA = 194 | PSLVERR = 0 
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 1115][0m data stored at slave[  4] = 194 
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 1115][0m ---------------------------------------
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 1115][0m ----           TEST PASS           ----
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 1115][0m ---------------------------------------
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 1165][0m READ TRANSFER
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 1165][0m  PRESETN = 1 | PSELX = 1 | PWRITE = 0 | PENABLE = 1 | PSTRB = 0 | PREADY = 1 | PRDATA = 0 | PSLVERR = 0 
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 1165][0m data stored at slave[ 56] =   0 
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 1165][0m ---------------------------------------
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 1165][0m ----           TEST FAIL           ----
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 1165][0m ---------------------------------------
+# 
+# 
+#  Design Entered reset
+# 
+# 
+#  Design Entered reset
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 1195][0m PRESETN = 0 | PSELX = 1 | PREADY = 0 | PRDATA = 0 | PSLVERR = 0 
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 1195][0m ---------------------------------------
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 1195][0m ----           TEST PASS           ----
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 1195][0m ---------------------------------------
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 1255][0m READ TRANSFER
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 1255][0m  PRESETN = 1 | PSELX = 1 | PWRITE = 0 | PENABLE = 1 | PSTRB = 0 | PREADY = 1 | PRDATA = 0 | PSLVERR = 0 
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 1255][0m data stored at slave[  4] =   0 
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 1255][0m ---------------------------------------
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 1255][0m ----           TEST FAIL           ----
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 1255][0m ---------------------------------------
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 1305][0m READ TRANSFER
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 1305][0m  PRESETN = 1 | PSELX = 1 | PWRITE = 0 | PENABLE = 1 | PSTRB = 0 | PREADY = 1 | PRDATA = 0 | PSLVERR = 0 
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 1305][0m data stored at slave[ 58] =   0 
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 1305][0m ---------------------------------------
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 1305][0m ----           TEST FAIL           ----
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 1305][0m ---------------------------------------
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 1355][0m WRITE TRANSFER
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 1355][0m  PRESETN = 1 | PSELX = 1 | PWRITE = 1 | PENABLE = 1 | PSTRB = 0 | PREADY = 1 | PRDATA = 0 | PSLVERR = 1 
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 1355][0m data strored at slave[233] = 216 
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 1355][0m SLAVE ERROR CHECK
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 1355][0m  PRESETN = 1 | PSELX = 1 | PWRITE = 1 | PENABLE = 1 | PREADY = 1 | PRDATA = 0 | PSLVERR = 1 
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 1355][0m data stored at slave[233] =   0 
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 1355][0m ---------------------------------------
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 1355][0m ----           TEST PASS           ----
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 1355][0m ---------------------------------------
+# [1;32m[INFO] [0m [1;36m(ID=TEST_DONE)[0m [1;34m[time = 1365][0m 'run' phase is ready to proceed to the 'extract' phase
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 1365][0m TOTAL PASS : 14
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 1365][0m TOTAL FAIL : 3
+# [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 1365][0m TOTAL CASES : 17
+# [1;32m[INFO] [0m [1;36m(ID=apb_master_subscriber)[0m [1;34m[time = 1365][0m [ACTIVE_MONITOR] Coverage ------> 60.61%,
+# [1;32m[INFO] [0m [1;36m(ID=apb_master_subscriber)[0m [1;34m[time = 1365][0m [PASSIVE_MONITOR] Coverage ------> 67.97%
 # 
 # --- UVM Report Summary ---
 # 
 # ** Report counts by severity
-# UVM_INFO :   36
+# UVM_INFO :  143
 # UVM_WARNING :    0
 # UVM_ERROR :    0
 # UVM_FATAL :    0
 # ** Report counts by id
 # [Questa UVM]     2
 # [RNTST]     1
-# [SCOREBOARD]    29
+# [SCOREBOARD]   136
 # [TEST_DONE]     1
 # [UVMTOP]     1
 # [apb_master_subscriber]     2
 # ** Note: $finish    : /tools/mentor/questasim_10.6c/questasim/linux/../verilog_src/uvm-1.1d/src/base/uvm_root.svh(430)
-#    Time: 165 ns  Iteration: 68  Instance: /top
+#    Time: 1365 ns  Iteration: 67  Instance: /top
 # Saving coverage database on exit...
-# End time: 21:53:33 on Dec 03,2025, Elapsed time: 0:00:04
+# End time: 00:26:14 on Dec 04,2025, Elapsed time: 0:00:05
 # Errors: 0, Warnings: 0

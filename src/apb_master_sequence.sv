@@ -59,7 +59,7 @@ class write_transfer extends uvm_sequence#(apb_master_sequence_item);
 	endfunction
 
 	task body();
-	//	repeat(`trans) begin
+	  
 			`uvm_do_with( 
 				req,
 				{ 
@@ -67,22 +67,32 @@ class write_transfer extends uvm_sequence#(apb_master_sequence_item);
 				 req.PSELX ==	1;
 				 req.PWRITE == 1;
 				 req.PSTRB == 0;
-				 req.PADDR == 6;
-				 req.PWDATA == 25;
+				 req.PADDR == 23;
 				}
 			)
-       		 `uvm_do_with( 
+    
+		 `uvm_do_with( 
 				req,
 				{ 
 				 req.PRESETN == 1;
 				 req.PSELX ==	1;
 				 req.PWRITE == 1;
-				 req.PSTRB == 0;	
-				 req.PADDR == 4;
-				 req.PWDATA == 50;
+				 req.PSTRB == 0;
+				 req.PADDR == 63;
 				}
 			)
-	//	end
+    	
+		`uvm_do_with( 
+				req,
+				{ 
+				 req.PRESETN == 1;
+				 req.PSELX ==	1;
+				 req.PWRITE == 1;
+				 req.PSTRB == 0;
+				 req.PADDR == 50;
+				}
+			)
+    
 	endtask
 endclass 
 
@@ -98,116 +108,197 @@ class read_transfer extends uvm_sequence#(apb_master_sequence_item);
 	endfunction
 
 	task body();
-	//	repeat(`trans) begin
+
 			`uvm_do_with( 
 				req,
 				{ 
 				 req.PRESETN == 1;
 				 req.PSELX ==	1;
 				 req.PWRITE == 0;
-				 req.PSTRB == 0;
-				 req.PADDR == 6;
-				 //req.PDATA inside {[0:255]};
+				 req.PADDR == 23;
 				}
 			)
-      		`uvm_do_with( 
+   
+			`uvm_do_with( 
 				req,
 				{ 
 				 req.PRESETN == 1;
-				 req.PSELX == 1; 
-				 req.PSTRB == 0;
+				 req.PSELX ==	1;
 				 req.PWRITE == 0;
-				 req.PADDR == 4;
-				 //req.PDATA inside {[0:255]};
+				 req.PADDR == 63;
 				}
 			)
-//		end
+   
+			`uvm_do_with( 
+				req,
+				{ 
+				 req.PRESETN == 1;
+				 req.PSELX ==	1;
+				 req.PWRITE == 0;
+				 req.PADDR == 50;
+				}
+			)
+   
+	endtask
+endclass 
+
+//------------------------------------------------------//
+//          write_read back to back sequence            //  
+//------------------------------------------------------//
+
+class write_read_transfer extends uvm_sequence#(apb_master_sequence_item);
+	`uvm_object_utils(write_read_transfer)
+
+	function new(string name = "write_read_transfer");
+		super.new(name);
+	endfunction
+
+	task body();
+
+		bit [ `ADDR_WIDTH - 1 : 0 ] temp_addr;
+		
+		repeat(`trans) begin
+				
+			`uvm_do_with( 
+				req,
+				{ 
+				 req.PRESETN == 1;
+				 req.PSELX ==	1;
+				 req.PWRITE == 1;
+				 req.PSTRB == 0;
+				 req.PADDR inside {[0:63]};
+				}
+			)
+
+			temp_addr = req.PADDR;
+
+		  `uvm_do_with( 
+				req,
+				{ 
+				 req.PRESETN == 1;
+				 req.PSELX ==	1;
+				 req.PWRITE == 0;
+				 req.PADDR == temp_addr;
+				}
+			)
+    
+		end
+	endtask
+endclass 
+
+
+//------------------------------------------------------//
+//  mid_reset transfer both write and read sequence     //  
+//------------------------------------------------------//
+
+class mid_reset extends uvm_sequence#(apb_master_sequence_item);
+	`uvm_object_utils(mid_reset)
+
+	function new(string name = "mid_reset");
+		super.new(name);
+	endfunction
+
+	task body();
+		
+		repeat(`trans - 3 )  begin
+     `uvm_do_with( 
+				req,
+				{ 
+				 req.PRESETN == 1;
+				 req.PSELX ==	1;
+				 req.PWRITE == 1;
+				 req.PSTRB == 0;
+				 req.PADDR inside {[0:63]};
+				}
+			)
+		end
+   
+		`uvm_do_with( req , { req.PRESETN == 0; } )
+  	
+		repeat(`trans - 3 )  begin
+     `uvm_do_with( 
+				req,
+				{ 
+				 req.PRESETN == 1;
+				 req.PSELX ==	1;
+				 req.PWRITE == 1;
+				 req.PSTRB == 0;
+				 req.PADDR inside {[0:63]};
+				}
+			)
+		end
+
+		`uvm_do_with( 
+				req,
+				{ 
+				 req.PRESETN == 1;
+				 req.PSELX ==	1;
+				 req.PWRITE == 0;
+				 req.PADDR == 4 ;
+				}
+			)
+		
+		`uvm_do_with( 
+				req,
+				{ 
+				 req.PRESETN == 1;
+				 req.PSELX ==	1;
+				 req.PWRITE == 0;
+				 req.PADDR == 56 ;
+				}
+			)
+		
+		`uvm_do_with( req , { req.PRESETN == 0; } )
+
+		`uvm_do_with( 
+				req,
+				{ 
+				 req.PRESETN == 1;
+				 req.PSELX ==	1;
+				 req.PWRITE == 0;
+				 req.PADDR == 4 ;
+				}
+			)
+
+		`uvm_do_with( 
+				req,
+				{ 
+				 req.PRESETN == 1;
+				 req.PSELX ==	1;
+				 req.PWRITE == 0;
+				 req.PADDR == 58 ;
+				}
+			)
+		
+	endtask
+endclass 
+
+//------------------------------------------------------//
+//               slave error sequence                   //  
+//------------------------------------------------------//
+
+class slave_error extends uvm_sequence#(apb_master_sequence_item);
+	`uvm_object_utils(slave_error)
+
+	function new(string name = "slave_error");
+		super.new(name);
+	endfunction
+
+	task body();
+		`uvm_do_with( 
+				req,
+				{ 
+				 req.PRESETN == 1;
+				 req.PSELX ==	1;
+				 req.PWRITE == 1;
+				 req.PSTRB == 0;
+				 req.PADDR inside {[192:255]} ;
+				}
+			)
 	endtask
 endclass 
 
 /*
-
-//------------------------------------------------------//
-//         single operand logical sequence              //  
-//------------------------------------------------------//
-
-class single_operand_logical extends uvm_sequence#(apb_master_sequence_item);
-	`uvm_object_utils(single_operand_logical)
-
-	function new(string name = "single_operand_logical");
-		super.new(name);
-	endfunction
-
-	task body();
-		repeat(`no_of_items) begin
-			`uvm_do_with( 
-				req,
-				{ 
-					req.rst == 0;
-					req.ce == 1;
-					req.mode == 0;
-					req.inp_valid inside {[1:2]};
-					req.cmd inside {[6:11]};
-				}
-			)
-		end
-	endtask
-endclass 
-
-//------------------------------------------------------//
-//         two operand arithmatic sequence              //  
-//------------------------------------------------------//
-
-class two_operand_arithmatic extends uvm_sequence#(apb_master_sequence_item);
-	`uvm_object_utils(two_operand_arithmatic)
-
-	function new(string name = "two_operand_arithmatic");
-		super.new(name);
-	endfunction
-
-	task body();
-		repeat(`no_of_items) begin
-			`uvm_do_with( 
-				req,
-				{ 
-					req.rst == 0;
-					req.ce == 1;
-					req.mode == 1;
-					req.inp_valid == 3;
-					req.cmd inside {[0:3],[8:10]};
-				}
-			)
-		end
-	endtask
-endclass 
-
-//------------------------------------------------------//
-//            two operand logical sequence              //  
-//------------------------------------------------------//
-
-class two_operand_logical extends uvm_sequence#(apb_master_sequence_item);
-	`uvm_object_utils(two_operand_logical)
-
-	function new(string name = "two_operand_logical");
-		super.new(name);
-	endfunction
-
-	task body();
-		repeat(`no_of_items) begin
-			`uvm_do_with( 
-				req,
-				{ 
-					req.rst == 0;
-					req.ce == 1;
-					req.mode == 0;
-					req.inp_valid == 3;
-					req.cmd inside {[0:5],[12:13]};
-				}
-			)
-		end
-	endtask
-endclass 
-
 //------------------------------------------------------//
 //      single operand arithmatic error sequence        //  
 //------------------------------------------------------//
@@ -580,11 +671,10 @@ class apb_master_regression extends uvm_sequence#(apb_master_sequence_item);
 	  presetn                   seq0;
     write_transfer            seq1;
     read_transfer             seq2;
+		write_read_transfer       seq3;
+  	mid_reset                 seq4;
+    slave_error               seq5;
 /*	
-	two_operand_arithmatic    seq3;
-	two_operand_logical       seq4;
-
-	single_operand_arithmatic_error seq5;
 	single_operand_logical_error    seq6;
 	two_operand_arithmatic_error    seq7;
 	two_operand_logical_error       seq8;
@@ -607,10 +697,10 @@ class apb_master_regression extends uvm_sequence#(apb_master_sequence_item);
     `uvm_do(seq0)
   	`uvm_do(seq1)
     `uvm_do(seq2)
-   // `uvm_do(seq0) 
-   // `uvm_do(seq0)
-/*	`uvm_do(seq3)         
-		`uvm_do(seq4)
+    `uvm_do(seq3) 
+    `uvm_do(seq4)
+    `uvm_do(seq5)         
+/*	`uvm_do(seq4)
 		`uvm_do(seq5)
 		`uvm_do(seq6)
 		`uvm_do(seq7)         

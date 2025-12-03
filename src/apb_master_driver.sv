@@ -73,6 +73,8 @@ class apb_master_driver extends uvm_driver#(apb_master_sequence_item);
 		vif.apb_master_driver_cb.PSELX   <=  req.PSELX; 
 		vif.apb_master_driver_cb.PRESETN <=  req.PRESETN; 
 		vif.apb_master_driver_cb.PENABLE <= 'b0;
+//		if(req.PADDR > 2 ** `ADDR_WIDTH - 1 )
+//		   vif.apb_master_driver_cb.PADDR   <= 'bx;
 		vif.apb_master_driver_cb.PADDR   <=  req.PADDR;
 		vif.apb_master_driver_cb.PWRITE  <=  req.PWRITE;
 		vif.apb_master_driver_cb.PWDATA  <=  req.PWDATA;

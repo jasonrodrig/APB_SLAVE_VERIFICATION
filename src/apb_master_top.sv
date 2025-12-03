@@ -85,7 +85,7 @@ module top;
 	apb_master_interface vif(PCLK);
 
 	// design instantiation
-	apb_slave DUT(
+/*	apb_slave DUT(
 		.clk(vif.PCLK),
 		.rst_n(vif.PRESETN),
 		.paddr(vif.PADDR),
@@ -97,6 +97,21 @@ module top;
 		.pready(vif.PREADY),
 		.prdata(vif.PRDATA),
 		.pslverr(vif.PSLVERR)
+	);
+*/
+
+	apb_slave DUT(
+		.PCLK(vif.PCLK),
+		.PRESETn(vif.PRESETN),
+		.PADDR(vif.PADDR),
+		.PSEL(vif.PSELX),
+		.PENABLE(vif.PENABLE),
+		.PWRITE(vif.PWRITE),
+		.PWDATA(vif.PWDATA),
+		.PSTRB(vif.PSTRB),
+		.PREADY(vif.PREADY),
+		.PRDATA(vif.PRDATA),
+		.PSLVERR(vif.PSLVERR)
 	);
 
 	// instantiating assertion signals

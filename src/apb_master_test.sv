@@ -125,105 +125,82 @@ class read_transfer_test extends apb_master_test;
 endclass
 
 
+
+//------------------------------------------------------//
+//     write_read_transfer back to back test            //  
+//------------------------------------------------------//
+
+class write_read_transfer_test extends apb_master_test;
+
+	`uvm_component_utils( write_read_transfer_test)
+	 write_read_transfer seq3;
+
+	function new(string name = " write_read_transfer_test", uvm_component parent);
+		super.new(name,parent);
+	endfunction : new
+
+	function void build_phase(uvm_phase phase);
+		super.build_phase(phase);
+		seq3 = write_read_transfer::type_id::create("write_read_transfer_seq3");
+	endfunction : build_phase
+
+	task run_phase(uvm_phase phase);
+		phase.raise_objection(this);
+		seq3.start(apb_master_env.apb_master_active_agt.apb_master_active_seqr);
+		phase.drop_objection(this);
+	endtask
+endclass
+
+//------------------------------------------------------//
+//            		 mid reset test                       //  
+//------------------------------------------------------//
+
+class mid_reset_test extends apb_master_test;
+
+	`uvm_component_utils(mid_reset_test)
+	 mid_reset seq4;
+
+	function new(string name = "mid_reset_test", uvm_component parent);
+		super.new(name,parent);
+	endfunction : new
+
+	function void build_phase(uvm_phase phase);
+		super.build_phase(phase);
+		seq4 = mid_reset::type_id::create("apb_master_mid_reset_seq4");
+	endfunction : build_phase
+
+	task run_phase(uvm_phase phase);
+		phase.raise_objection(this);
+		seq4.start(apb_master_env.apb_master_active_agt.apb_master_active_seqr);
+		phase.drop_objection(this);
+	endtask
+endclass
+
+
+//------------------------------------------------------//
+//                 slave error test                     //  
+//------------------------------------------------------//
+
+class slave_error_test extends apb_master_test;
+	`uvm_component_utils( slave_error_test)
+   slave_error seq5;
+	function new(string name = " slave_error_test", uvm_component parent);
+		super.new(name,parent);
+	endfunction : new
+
+	function void build_phase(uvm_phase phase);
+		super.build_phase(phase);
+		seq5 = slave_error ::type_id::create("apb_master_slave_error_seq5");
+	endfunction : build_phase
+
+	task run_phase(uvm_phase phase);
+		phase.raise_objection(this);
+		seq5.start(apb_master_env.apb_master_active_agt.apb_master_active_seqr);
+		phase.drop_objection(this);
+	endtask
+endclass
+
 /*
-//------------------------------------------------------//
-//         single operand logical test                  //  
-//------------------------------------------------------//
-
-class single_operand_logical_test extends apb_master_test;
-
-	`uvm_component_utils( single_operand_logical_test)
-	single_operand_logical seq2;
-
-	function new(string name = " single_operand_logical_test", uvm_component parent);
-		super.new(name,parent);
-	endfunction : new
-
-	function void build_phase(uvm_phase phase);
-		super.build_phase(phase);
-		seq2 = single_operand_logical::type_id::create("apb_master_seq2");
-	endfunction : build_phase
-
-	task run_phase(uvm_phase phase);
-		phase.raise_objection(this);
-		seq2.start(apb_master_env.alu_active_agt.alu_active_seqr);
-		phase.drop_objection(this);
-	endtask
-endclass
-
-//------------------------------------------------------//
-//         two operand arithmatic test                  //  
-//------------------------------------------------------//
-
-class two_operand_arithmatic_test extends apb_master_test;
-
-	`uvm_component_utils( two_operand_arithmatic_test)
-	two_operand_arithmatic seq3;
-
-	function new(string name = " two_operand_arithmatic_test", uvm_component parent);
-		super.new(name,parent);
-	endfunction : new
-
-	function void build_phase(uvm_phase phase);
-		super.build_phase(phase);
-		seq3 = two_operand_arithmatic ::type_id::create("apb_master_seq3");
-	endfunction : build_phase
-
-	task run_phase(uvm_phase phase);
-		phase.raise_objection(this);
-		seq3.start(apb_master_env.alu_active_agt.alu_active_seqr);
-		phase.drop_objection(this);
-	endtask
-endclass
-
-//------------------------------------------------------//
-//            two operand logical test                  //  
-//------------------------------------------------------//
-
-class two_operand_logical_test extends apb_master_test;
-
-	`uvm_component_utils( two_operand_logical_test)
-	two_operand_logical seq4;
-
-	function new(string name = " two_operand_logical_test", uvm_component parent);
-		super.new(name,parent);
-	endfunction : new
-
-	function void build_phase(uvm_phase phase);
-		super.build_phase(phase);
-		seq4 = two_operand_logical::type_id::create("apb_master_seq4");
-	endfunction : build_phase
-
-	task run_phase(uvm_phase phase);
-		phase.raise_objection(this);
-		seq4.start(apb_master_env.alu_active_agt.alu_active_seqr);
-		phase.drop_objection(this);
-	endtask
-endclass
-
-//------------------------------------------------------//
-//      single operand arithmatic error test            //  
-//------------------------------------------------------//
-
-class single_operand_arithmatic_error_test extends apb_master_test;
-	`uvm_component_utils( single_operand_arithmatic_error_test)
-	single_operand_arithmatic_error seq5;
-	function new(string name = " single_operand_arithmatic_error_test", uvm_component parent);
-		super.new(name,parent);
-	endfunction : new
-
-	function void build_phase(uvm_phase phase);
-		super.build_phase(phase);
-		seq5 = single_operand_arithmatic_error ::type_id::create("apb_master_seq5");
-	endfunction : build_phase
-
-	task run_phase(uvm_phase phase);
-		phase.raise_objection(this);
-		seq5.start(apb_master_env.alu_active_agt.alu_active_seqr);
-		phase.drop_objection(this);
-	endtask
-endclass
-
 //------------------------------------------------------//
 //      single operand logical error test               //  
 //------------------------------------------------------//
