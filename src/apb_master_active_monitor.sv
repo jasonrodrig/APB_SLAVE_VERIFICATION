@@ -58,9 +58,12 @@ class apb_master_active_monitor extends uvm_monitor;
 		seq.PRESETN = vif.apb_master_monitor_cb.PRESETN;
 		seq.PSELX   = vif.apb_master_monitor_cb.PSELX;
 		// `uvm_info( "ACTIVE_MON" ,
-		//				$sformatf( " PRESETN = %0B | PSELX = %0B | PWRITE = %0B | PENABLE = %0B | PREADY = %0B | PRDATA = %0D | PSLVERR = %0B ",
-		//					vif.apb_master_monitor_cb.PRESETN , vif.apb_master_monitor_cb.PSELX , vif.apb_master_monitor_cb.PWRITE , vif.apb_master_monitor_cb.PENABLE , vif.apb_master_monitor_cb.PREADY , vif.apb_master_monitor_cb.PRDATA , vif.apb_master_monitor_cb.PSLVERR  ) , UVM_NONE )
-		//  `uvm_info( "ACTIVE_MON" , $sformatf("data stored at slave[%d] = %d " , vif.apb_master_monitor_cb.PADDR, vif.apb_master_monitor_cb.PWDATA ) , UVM_NONE )
+		//				     $sformatf( " PRESETN = %0B | PSELX = %0B | PWRITE = %0B | PENABLE = %0B | PREADY = %0B | PRDATA = %0D | PSLVERR = %0B ",
+		//					   vif.apb_master_monitor_cb.PRESETN , vif.apb_master_monitor_cb.PSELX , vif.apb_master_monitor_cb.PWRITE , 
+		//					   vif.apb_master_monitor_cb.PENABLE , vif.apb_master_monitor_cb.PREADY , vif.apb_master_monitor_cb.PRDATA , 
+		//					   vif.apb_master_monitor_cb.PSLVERR  ) , UVM_NONE )
+		// `uvm_info( "ACTIVE_MON" , $sformatf("data stored at slave[%d] = %d " , 
+		//                           vif.apb_master_monitor_cb.PADDR, vif.apb_master_monitor_cb.PWDATA ) , UVM_NONE )
 		active_mon_port.write(seq);
 	endtask	
 
@@ -76,6 +79,7 @@ class apb_master_active_monitor extends uvm_monitor;
 		seq.PADDR   = vif.apb_master_monitor_cb.PADDR;
 		seq.PWDATA  = vif.apb_master_monitor_cb.PWDATA;
 		seq.PENABLE = vif.apb_master_monitor_cb.PENABLE;
+		seq.PSTRB   = vif.apb_master_monitor_cb.PSTRB;
 	endtask
 
 	//-------------------------------------------------------------------//
@@ -83,21 +87,24 @@ class apb_master_active_monitor extends uvm_monitor;
 	//-------------------------------------------------------------------//
 
 	task access_state();
-		int cycle_cnt = 0 ;
 		seq.PRESETN = vif.apb_master_monitor_cb.PRESETN;
 		seq.PSELX   = vif.apb_master_monitor_cb.PSELX;
 		seq.PWRITE  = vif.apb_master_monitor_cb.PWRITE;
 		seq.PADDR   = vif.apb_master_monitor_cb.PADDR;
 		seq.PWDATA  = vif.apb_master_monitor_cb.PWDATA;
 		seq.PENABLE = vif.apb_master_monitor_cb.PENABLE;
+		seq.PSTRB   = vif.apb_master_monitor_cb.PSTRB;
 
 		while(!vif.apb_master_monitor_cb.PREADY)
 			@(vif.apb_master_monitor_cb);
 		//`uvm_info( "ACTIVE_MON" ,
-		//          $sformatf( " PRESETN = %0B | PSELX = %0B | PWRITE = %0B | PADDR = %0D | PENABLE = %0B | PREADY = %0B | PRDATA = %0D | PSLVERR = %0B ",
-		//					vif.apb_master_monitor_cb.PRESETN , vif.apb_master_monitor_cb.PSELX , vif.apb_master_monitor_cb.PWRITE ,vif.apb_master_monitor_cb.PADDR , vif.apb_master_monitor_cb.PENABLE , vif.apb_master_monitor_cb.PREADY , vif.apb_master_monitor_cb.PRDATA , vif.apb_master_monitor_cb.PSLVERR  ) , UVM_NONE )
-		//  if( vif.apb_master_monitor_cb.PWRITE )
-		// `uvm_info( "ACTIVE_MON" , $sformatf("data stored at slave[%d] = %d " , vif.apb_master_monitor_cb.PADDR, vif.apb_master_monitor_cb.PWDATA ) , UVM_NONE )
+		//            $sformatf( " PRESETN = %0B | PSELX = %0B | PWRITE = %0B | PADDR = %0D | PENABLE = %0B | PREADY = %0B | PRDATA = %0D | 
+		//            PSLVERR = %0B ", vif.apb_master_monitor_cb.PRESETN , vif.apb_master_monitor_cb.PSELX , vif.apb_master_monitor_cb.PWRITE ,
+		//            vif.apb_master_monitor_cb.PADDR , vif.apb_master_monitor_cb.PENABLE , vif.apb_master_monitor_cb.PREADY , 
+		//            vif.apb_master_monitor_cb.PRDATA , vif.apb_master_monitor_cb.PSLVERR  ) , UVM_NONE )
+		// if( vif.apb_master_monitor_cb.PWRITE )
+		// `uvm_info( "ACTIVE_MON" , 
+		//             $sformatf("data stored at slave[%d] = %d " , vif.apb_master_monitor_cb.PADDR, vif.apb_master_monitor_cb.PWDATA ) , UVM_NONE )
 
 		active_mon_port.write(seq); 
 		repeat(2)@(vif.apb_master_monitor_cb);

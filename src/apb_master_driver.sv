@@ -58,10 +58,10 @@ class apb_master_driver extends uvm_driver#(apb_master_sequence_item);
 		vif.apb_master_driver_cb.PSELX   <= req.PSELX; 
 		vif.apb_master_driver_cb.PRESETN <= req.PRESETN; 
 		vif.apb_master_driver_cb.PENABLE <= 'b0;
-		// `uvm_info( "Driver" , $sformatf( " PRESETN = %0B | PSELX = %0B | PWRITE = %0B | PENABLE = %0B  ", req.PRESETN , req.PSELX , req.PWRITE , req.PENABLE ) , UVM_NONE )
+		// `uvm_info( "Driver" , 
+		//             $sformatf( " PRESETN = %0B | PSELX = %0B | PWRITE = %0B | PENABLE = %0B  ",
+		//             req.PRESETN , req.PSELX , req.PWRITE , req.PENABLE ) , UVM_NONE )
 		// `uvm_info( "Driver" , $sformatf(" data strored at slave[%d] = %d " , req.PADDR, req.PWDATA ) , UVM_NONE )
-
-
 	endtask
 
 	//------------------------------------------------------//
@@ -76,9 +76,10 @@ class apb_master_driver extends uvm_driver#(apb_master_sequence_item);
 		vif.apb_master_driver_cb.PADDR   <=  req.PADDR;
 		vif.apb_master_driver_cb.PWRITE  <=  req.PWRITE;
 		vif.apb_master_driver_cb.PWDATA  <=  req.PWDATA;
+		vif.apb_master_driver_cb.PSTRB   <=  req.PSTRB;
 		// `uvm_info( "Driver" ,
-		//				$sformatf( " PRESETN = %0B | PSELX = %0B | PWRITE = %0B | PENABLE = %0B ",
-		//                        req.PRESETN , req.PSELX , req.PWRITE , req.PENABLE ),  UVM_NONE )
+		//	      		 $sformatf( " PRESETN = %0B | PSELX = %0B | PWRITE = %0B | PENABLE = %0B ",
+		//             req.PRESETN , req.PSELX , req.PWRITE , req.PENABLE ),  UVM_NONE )
 		//`uvm_info( "Driver" , $sformatf("data strored at slave[%d] = %d " , req.PADDR, req.PWDATA ) , UVM_NONE )
 	endtask
 
@@ -91,8 +92,8 @@ class apb_master_driver extends uvm_driver#(apb_master_sequence_item);
 		vif.apb_master_driver_cb.PENABLE <= 'b1;
 		wait_state_detection();
 		// `uvm_info( "Driver" ,
-		//			$sformatf( " PRESETN = %0B | PSELX = %0B | PWRITE = %0B | PENABLE = %0B ",
-		//                       req.PRESETN , req.PSELX , req.PWRITE , req.PENABLE ),  UVM_NONE )
+		//		        $sformatf( " PRESETN = %0B | PSELX = %0B | PWRITE = %0B | PENABLE = %0B ",
+		//            req.PRESETN , req.PSELX , req.PWRITE , req.PENABLE ),  UVM_NONE )
 		//`uvm_info( "Driver" , $sformatf("data strored at slave[%d] = %d " , req.PADDR, req.PWDATA ) , UVM_NONE )
 
 		vif.apb_master_driver_cb.PSELX <= 0;

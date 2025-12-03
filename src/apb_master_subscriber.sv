@@ -26,7 +26,7 @@ class apb_master_subscriber extends uvm_component;
 		pselx  : coverpoint active_mon.PSELX   { bins b2[] = {0,1};}
     penable: coverpoint active_mon.PENABLE { bins b3[] = {0,1};}
 		pwrite : coverpoint active_mon.PWRITE  { bins b4[] = {0,1};}
-		pwdata : coverpoint active_mon.PWDATA  { bins b5[] = { [ 0 : ( 2 ** `DATA_WIDTH ) ]}; }
+		pwdata : coverpoint active_mon.PWDATA  { bins b5[] = { [ 0 : ( 2 ** `DATA_WIDTH ) - 1 ]}; }
 		paddr  : coverpoint active_mon.PADDR   { bins b6[] = { [ 0 : ( 2 ** `ADDR_WIDTH ) - 1 ]}; }
 		
 /*		pstrb  : coverpoint active_mon.PSTRB iff(active_mon.PWRITE){ 
@@ -61,7 +61,7 @@ class apb_master_subscriber extends uvm_component;
 		option.per_instance = 1;
     pready  : coverpoint passive_mon.PREADY  { bins b7[] = {0,1};}
 		pslverr : coverpoint passive_mon.PSLVERR { bins b8[] = {0,1};}
-		prdata  : coverpoint passive_mon.PRDATA  { bins b9[] = { [ 0 : ( 2 ** `DATA_WIDTH ) ]};}
+		prdata  : coverpoint passive_mon.PRDATA  { bins b9[] = { [ 0 : ( 2 ** `DATA_WIDTH ) - 1 ]};}
   endgroup
 
 	//------------------------------------------------------//

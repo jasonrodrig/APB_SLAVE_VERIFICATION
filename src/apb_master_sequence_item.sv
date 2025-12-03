@@ -7,7 +7,7 @@ class apb_master_sequence_item extends uvm_sequence_item;
 	rand logic PRESETN , PWRITE , PSELX;
 	rand logic [`DATA_WIDTH - 1:0] PWDATA ;
 	rand logic [`ADDR_WIDTH - 1:0] PADDR;
-	//rand logic [ ( `DATA_WIDTH / 8 ) - 1 : 0 ] PSTRB;
+	rand logic [ ( `DATA_WIDTH / 8 ) - 1 : 0 ] PSTRB;
 
 	//------------------------------------------------------//
 	//          non randomized output signals               //  
@@ -28,7 +28,7 @@ class apb_master_sequence_item extends uvm_sequence_item;
 	`uvm_field_int(PWRITE,UVM_ALL_ON)
 	`uvm_field_int(PWDATA,UVM_ALL_ON)
 	`uvm_field_int(PADDR,UVM_ALL_ON)
-//	`uvm_field_int(PSTRB,UVM_ALL_ON)
+	`uvm_field_int(PSTRB,UVM_ALL_ON)
 	`uvm_field_int(PRDATA,UVM_ALL_ON)
 	`uvm_field_int(PREADY,UVM_ALL_ON)
 	`uvm_field_int(PSLVERR,UVM_ALL_ON)

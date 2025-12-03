@@ -1,5 +1,5 @@
 # vsim -vopt work.top -voptargs="+acc=npr" -assertdebug -l simulation.log -coverage -c -do "coverage save -onexit -assert -directive -cvg -codeAll coverage.ucdb; run -all; exit" 
-# Start time: 23:31:35 on Dec 02,2025
+# Start time: 14:30:19 on Dec 03,2025
 # ** Note: (vsim-3812) Design is being optimized...
 # ** Note: (vopt-143) Recognized 1 FSM in module "apb_slave(fast)".
 # //  Questa Sim
@@ -52,14 +52,6 @@
 # UVM_INFO verilog_src/questa_uvm_pkg-1.2/src/questa_uvm_pkg.sv(215) @ 0: reporter [Questa UVM] QUESTA_UVM-1.2.3
 # UVM_INFO verilog_src/questa_uvm_pkg-1.2/src/questa_uvm_pkg.sv(217) @ 0: reporter [Questa UVM]  questa_uvm::init(+struct)
 # UVM_INFO @ 0: reporter [RNTST] Running test apb_master_regression_test...
-# ** Warning: (vsim-3881) apb_master_subscriber.sv(64): Sign-and-Width conversion applied in bin 'b9' for Coverpoint 'prdata'. Value '256' changed to '255 (maximum)' value.
-#    Time: 0 ns  Iteration: 7  Region: /uvm_pkg::uvm_phase::m_run_phases
-# ** Warning: (vsim-3882) apb_master_subscriber.sv(64): Out of bounds value range in bin 'b9' for Coverpoint 'prdata' converted to nearest valid bounded range of [0:255].
-#    Time: 0 ns  Iteration: 7  Region: /uvm_pkg::uvm_phase::m_run_phases
-# ** Warning: (vsim-3881) apb_master_subscriber.sv(29): Sign-and-Width conversion applied in bin 'b5' for Coverpoint 'pwdata'. Value '256' changed to '255 (maximum)' value.
-#    Time: 0 ns  Iteration: 7  Region: /uvm_pkg::uvm_phase::m_run_phases
-# ** Warning: (vsim-3882) apb_master_subscriber.sv(29): Out of bounds value range in bin 'b5' for Coverpoint 'pwdata' converted to nearest valid bounded range of [0:255].
-#    Time: 0 ns  Iteration: 7  Region: /uvm_pkg::uvm_phase::m_run_phases
 # [1;32m[INFO] [0m [1;36m(ID=UVMTOP)[0m [1;34m[time = 0][0m UVM testbench topology:
 # ---------------------------------------------------------------------------
 # Name                          Type                              Size  Value
@@ -140,5 +132,5 @@
 # ** Note: $finish    : /tools/mentor/questasim_10.6c/questasim/linux/../verilog_src/uvm-1.1d/src/base/uvm_root.svh(430)
 #    Time: 165 ns  Iteration: 68  Instance: /top
 # Saving coverage database on exit...
-# End time: 23:31:39 on Dec 02,2025, Elapsed time: 0:00:04
-# Errors: 0, Warnings: 4
+# End time: 14:30:23 on Dec 03,2025, Elapsed time: 0:00:04
+# Errors: 0, Warnings: 0

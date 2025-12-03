@@ -4,7 +4,7 @@ interface apb_master_interface(input bit PCLK);
 	bit PRESETN, PSELX , PENABLE , PWRITE;
 	bit [`DATA_WIDTH - 1 :0] PWDATA ; 
 	bit [`ADDR_WIDTH - 1 :0] PADDR;
-  bit [  3 : 0 ] PSTRB;
+  bit [(`DATA_WIDTH / 8 ) - 1 : 0 ] PSTRB;
 
 	// APB_SLAVE output signals
 	logic [ `DATA_WIDTH - 1 : 0] PRDATA ;
@@ -20,7 +20,7 @@ interface apb_master_interface(input bit PCLK);
     output PENABLE;
 	  output PADDR;
   	output PWDATA;
-//	output PSTRB;
+  	output PSTRB;
 	endclocking
 
 	// Clocking block apb_master_monitor_cb synchronizes DUT inputs and outputs
@@ -32,7 +32,7 @@ interface apb_master_interface(input bit PCLK);
 		input PENABLE;  
 		input PADDR;
 		input PWDATA;
-//	input PSTRB;  
+  	input PSTRB;  
 		input PREADY;
 		input PRDATA;
 		input PSLVERR; 

@@ -60,8 +60,11 @@ class apb_master_passive_monitor extends uvm_monitor;
 		seq.PSLVERR = vif.apb_master_monitor_cb.PSLVERR;
 		//`uvm_info( "PASSIVE_MON" ,
 		//			$sformatf( " PRESETN = %0B | PSELX = %0B | PWRITE = %0B | PENABLE = %0B | PREADY = %0B | PRDATA = %0D | PSLVERR = %0B ",
-		//				vif.apb_master_monitor_cb.PRESETN , vif.apb_master_monitor_cb.PSELX , vif.apb_master_monitor_cb.PWRITE , vif.apb_master_monitor_cb.PENABLE , vif.apb_master_monitor_cb.PREADY , vif.apb_master_monitor_cb.PRDATA , vif.apb_master_monitor_cb.PSLVERR  ) , UVM_NONE )
-		//`uvm_info( "PASSIVE_MON" , $sformatf("data stored at slave[%d] = %d " , vif.apb_master_monitor_cb.PADDR, vif.apb_master_monitor_cb.PWDATA ) , UVM_NONE )
+		//			vif.apb_master_monitor_cb.PRESETN , vif.apb_master_monitor_cb.PSELX , vif.apb_master_monitor_cb.PWRITE , 
+		//			vif.apb_master_monitor_cb.PENABLE , vif.apb_master_monitor_cb.PREADY , vif.apb_master_monitor_cb.PRDATA ,
+		//			vif.apb_master_monitor_cb.PSLVERR  ) , UVM_NONE )
+		//`uvm_info( "PASSIVE_MON" , 
+		//            $sformatf("data stored at slave[%d] = %d " , vif.apb_master_monitor_cb.PADDR, vif.apb_master_monitor_cb.PWDATA ) , UVM_NONE )
 		passive_mon_port.write(seq); 
 	endtask		
 
@@ -81,7 +84,7 @@ class apb_master_passive_monitor extends uvm_monitor;
 	//-------------------------------------------------------------------//
 
 	task access_state();
-		while (!vif.apb_master_monitor_cb.PREADY)
+		while(!vif.apb_master_monitor_cb.PREADY)
 			@(vif.apb_master_monitor_cb);
 
 		seq.PREADY  = vif.apb_master_monitor_cb.PREADY;
@@ -89,10 +92,13 @@ class apb_master_passive_monitor extends uvm_monitor;
 		seq.PSLVERR = vif.apb_master_monitor_cb.PSLVERR; 
 
 		//`uvm_info( "PASSIVE_MON" ,
-		//          $sformatf( " PRESETN = %0B | PSELX = %0B | PWRITE = %0B | PADDR = %0D | PENABLE = %0B |  PREADY = %0B | PRDATA = %0D | PSLVERR = %0B ",
-		//					vif.apb_master_monitor_cb.PRESETN , vif.apb_master_monitor_cb.PSELX , vif.apb_master_monitor_cb.PWRITE , vif.apb_master_monitor_cb.PADDR , vif.apb_master_monitor_cb.PENABLE , vif.apb_master_monitor_cb.PREADY , vif.apb_master_monitor_cb.PRDATA , vif.apb_master_monitor_cb.PSLVERR  ) , UVM_NONE )
-		// if( vif.apb_master_monitor_cb.PWRITE )
-		// `uvm_info( "PASSIVE_MON" , $sformatf("data stored at slave[%d] = %d " , vif.apb_master_monitor_cb.PADDR, vif.apb_master_monitor_cb.PWDATA ) , UVM_NONE )
+		//            $sformatf( " PRESETN = %0B | PSELX = %0B | PWRITE = %0B | PADDR = %0D | PENABLE = %0B |  PREADY = %0B | PRDATA = %0D | 
+		//            PSLVERR = %0B ",vif.apb_master_monitor_cb.PRESETN , vif.apb_master_monitor_cb.PSELX , vif.apb_master_monitor_cb.PWRITE ,
+		//            vif.apb_master_monitor_cb.PADDR , vif.apb_master_monitor_cb.PENABLE , vif.apb_master_monitor_cb.PREADY , 
+		//            vif.apb_master_monitor_cb.PRDATA , vif.apb_master_monitor_cb.PSLVERR  ) , UVM_NONE )
+		//if( vif.apb_master_monitor_cb.PWRITE )
+		// `uvm_info( "PASSIVE_MON" , 
+		//             $sformatf("data stored at slave[%d] = %d " , vif.apb_master_monitor_cb.PADDR, vif.apb_master_monitor_cb.PWDATA ) , UVM_NONE )
 		passive_mon_port.write(seq); 
 		repeat(2)@(vif.apb_master_monitor_cb);
 	endtask

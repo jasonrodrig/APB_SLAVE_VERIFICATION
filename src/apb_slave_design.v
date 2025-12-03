@@ -197,7 +197,7 @@ module apb_slave #(parameter ADDR_WIDTH = 8, WIDTH = 8)
   input                        psel,
   input                        penable,
   input        [WIDTH-1:0]     pwdata,
-  input         [3:0]          pstrb,
+  input        [(WIDTH/8)-1:0] pstrb,
   output logic [WIDTH-1:0]     prdata,
   output logic                 pready, 
   output logic                 pslverr
