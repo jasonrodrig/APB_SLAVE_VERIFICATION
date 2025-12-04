@@ -80,7 +80,7 @@ class apb_master_active_monitor extends uvm_monitor;
 		seq.PWDATA  = vif.apb_master_monitor_cb.PWDATA;
 		seq.PENABLE = vif.apb_master_monitor_cb.PENABLE;
 		seq.PSTRB   = vif.apb_master_monitor_cb.PSTRB;
-	endtask
+ 	endtask
 
 	//-------------------------------------------------------------------//
 	//    capturing the input signals from the interface in access state //  
