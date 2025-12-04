@@ -270,12 +270,12 @@ module apb_slave #(parameter ADDR_WIDTH=8, DATA_WIDTH = 32)(
 
   parameter N = 4;  // Number of wait states
 
-	integer index;
+  reg [$clog2(`DATA_WIDTH) - 1 :0] index;
 	reg [`DATA_WIDTH-1:0] mask;
 	integer i, j;
 
   reg [DATA_WIDTH-1:0] mem [0:(2**ADDR_WIDTH)-1]; // 8x8-bit memory
-  reg [2:0] wait_counter;  // Counter for wait states
+  reg [1:0] wait_counter;  // Counter for wait states
   reg transaction_active = 0;  //  indicate an active transaction
 
   always @(posedge PCLK or negedge PRESETn) 

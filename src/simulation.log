@@ -1,5 +1,5 @@
 # vsim -vopt work.top -voptargs="+acc=npr" -assertdebug -l simulation.log -coverage -c -do "coverage save -onexit -assert -directive -cvg -codeAll coverage.ucdb; run -all; exit" 
-# Start time: 21:29:26 on Dec 04,2025
+# Start time: 00:33:05 on Dec 05,2025
 # ** Note: (vsim-3812) Design is being optimized...
 # //  Questa Sim
 # //  Version 10.6c linux Jul 25 2017
@@ -238,6 +238,8 @@
 # [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 1415][0m ---------------------------------------
 # [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 1415][0m ----           TEST FAIL           ----
 # [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 1415][0m ---------------------------------------
+# ** Error: SLAVE ERROR NOT ASSERTED FOR OUT OF RANGE ADDRESS!
+#    Time: 1455 ns Started: 1445 ns  Scope: top.vif.ASSERT File: apb_master_assertions.sv Line: 173 Expr: PSLVERR
 # [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 1465][0m WRITE TRANSFER
 # [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 1465][0m  PRESETN = 1 | PSELX = 1 | PWRITE = 1 | PENABLE = 1 | PSTRB = 0 | PREADY = 1 | PRDATA = 0 | PSLVERR = 1 
 # [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 1465][0m data strored at slave[233] = 1241633816 
@@ -247,12 +249,20 @@
 # [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 1465][0m ---------------------------------------
 # [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 1465][0m ----           TEST PASS           ----
 # [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 1465][0m ---------------------------------------
+# ** Error: SLAVE ERROR NOT ASSERTED FOR OUT OF RANGE ADDRESS!
+#    Time: 1465 ns Started: 1455 ns  Scope: top.vif.ASSERT File: apb_master_assertions.sv Line: 173 Expr: PSLVERR
+# ** Error: SLAVE ERROR NOT ASSERTED FOR OUT OF RANGE ADDRESS!
+#    Time: 1485 ns Started: 1475 ns  Scope: top.vif.ASSERT File: apb_master_assertions.sv Line: 173 Expr: PSLVERR
 # [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 1495][0m SLAVE ERROR CHECK
 # [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 1495][0m  PRESETN = 1 | PSELX = 1 | PWRITE = 1 | PENABLE = 1 | PREADY = 0 | PRDATA = 0 | PSLVERR = 0 
 # [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 1495][0m data stored at slave[233] =          0 
 # [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 1495][0m ---------------------------------------
 # [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 1495][0m ----           TEST FAIL           ----
 # [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 1495][0m ---------------------------------------
+# ** Error: SLAVE ERROR NOT ASSERTED FOR OUT OF RANGE ADDRESS!
+#    Time: 1495 ns Started: 1485 ns  Scope: top.vif.ASSERT File: apb_master_assertions.sv Line: 173 Expr: PSLVERR
+# ** Error: SLAVE ERROR NOT ASSERTED FOR OUT OF RANGE ADDRESS!
+#    Time: 1505 ns Started: 1495 ns  Scope: top.vif.ASSERT File: apb_master_assertions.sv Line: 173 Expr: PSLVERR
 # [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 1515][0m READ TRANSFER
 # [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 1515][0m  PRESETN = 1 | PSELX = 1 | PWRITE = 0 | PENABLE = 1 | PSTRB = 0 | PREADY = 1 | PRDATA = 0 | PSLVERR = 1 
 # [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 1515][0m data stored at slave[246] =          0 
@@ -265,12 +275,18 @@
 # [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 1515][0m ---------------------------------------
 # [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 1515][0m ----           TEST PASS           ----
 # [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 1515][0m ---------------------------------------
+# ** Error: SLAVE ERROR NOT ASSERTED FOR OUT OF RANGE ADDRESS!
+#    Time: 1515 ns Started: 1505 ns  Scope: top.vif.ASSERT File: apb_master_assertions.sv Line: 173 Expr: PSLVERR
+# ** Error: SLAVE ERROR NOT ASSERTED FOR OUT OF RANGE ADDRESS!
+#    Time: 1535 ns Started: 1525 ns  Scope: top.vif.ASSERT File: apb_master_assertions.sv Line: 173 Expr: PSLVERR
 # [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 1545][0m SLAVE ERROR CHECK
 # [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 1545][0m  PRESETN = 1 | PSELX = 1 | PWRITE = 0 | PENABLE = 1 | PREADY = 0 | PRDATA = 0 | PSLVERR = 0 
 # [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 1545][0m data stored at slave[246] =          0 
 # [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 1545][0m ---------------------------------------
 # [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 1545][0m ----           TEST FAIL           ----
 # [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 1545][0m ---------------------------------------
+# ** Error: SLAVE ERROR NOT ASSERTED FOR OUT OF RANGE ADDRESS!
+#    Time: 1545 ns Started: 1535 ns  Scope: top.vif.ASSERT File: apb_master_assertions.sv Line: 173 Expr: PSLVERR
 # [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 1565][0m WRITE TRANSFER
 # [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 1565][0m  PRESETN = 1 | PSELX = 1 | PWRITE = 1 | PENABLE = 1 | PSTRB = 0 | PREADY = 1 | PRDATA = 0 | PSLVERR = 0 
 # [1;32m[INFO] [0m [1;36m(ID=SCOREBOARD)[0m [1;34m[time = 1565][0m data strored at slave[185] = 1725853359 
@@ -940,5 +956,5 @@
 # ** Note: $finish    : /tools/mentor/questasim_10.6c/questasim/linux/../verilog_src/uvm-1.1d/src/base/uvm_root.svh(430)
 #    Time: 8275 ns  Iteration: 67  Instance: /top
 # Saving coverage database on exit...
-# End time: 21:29:30 on Dec 04,2025, Elapsed time: 0:00:04
-# Errors: 0, Warnings: 8
+# End time: 00:33:10 on Dec 05,2025, Elapsed time: 0:00:05
+# Errors: 8, Warnings: 8
