@@ -150,9 +150,9 @@ interface apb_master_assertions(
     // PADDR & PWDATA must remain stable between setup and access
     // ------------------------------------------------------------
     property p_write_stability;
-        @(posedge PCLK) disable iff (!PRESETN)
-        (PSELX && PWRITE && !PENABLE)
-            |-> ##1 (PSELX && PWRITE && PENABLE &&
+        @(posedge PCLK) disable iff (!PRESETN ) // || PSTRB != 0)
+        (PSELX && PWRITE && !PENABLE && PSTRB )
+            |-> ##1 (PSELX && PWRITE && PENABLE && PSTRB &&
                      $stable(PADDR) && $stable(PWDATA))[*3];
     endproperty
 
@@ -183,7 +183,20 @@ interface apb_master_assertions(
 
     assert property(p_idle_state)
     else $error(" IDLE STATE FAILED WHEN PSELX IS 0");
+ 
+		// ----------------------------------------------------------------
+    // PROPERTY 8 : PSTRB CHECK
+    // when pwrite is 1 then pstrb should select only single byte_lane
+    // ----------------------------------------------------------------
   
+    property p_pstrb_one_hot;
+    @(posedge PCLK) disable iff(!PRESETN || !PSTRB)
+    (PSELX && PENABLE && PWRITE) |-> $onehot(PSTRB);
+    endproperty
+
+     assert property(p_pstrb_one_hot)
+     else $error("Illegal PSTRB pattern – expected one-hot");
+
 endinterface
 
 	

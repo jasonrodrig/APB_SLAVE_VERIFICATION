@@ -1,5 +1,5 @@
 # vsim -vopt work.top -voptargs="+acc=npr" -assertdebug -l simulation.log -coverage -c -do "coverage save -onexit -assert -directive -cvg -codeAll coverage.ucdb; run -all; exit" 
-# Start time: 00:33:05 on Dec 05,2025
+# Start time: 00:48:16 on Dec 05,2025
 # ** Note: (vsim-3812) Design is being optimized...
 # //  Questa Sim
 # //  Version 10.6c linux Jul 25 2017
@@ -956,5 +956,5 @@
 # ** Note: $finish    : /tools/mentor/questasim_10.6c/questasim/linux/../verilog_src/uvm-1.1d/src/base/uvm_root.svh(430)
 #    Time: 8275 ns  Iteration: 67  Instance: /top
 # Saving coverage database on exit...
-# End time: 00:33:10 on Dec 05,2025, Elapsed time: 0:00:05
+# End time: 00:48:20 on Dec 05,2025, Elapsed time: 0:00:04
 # Errors: 8, Warnings: 8
