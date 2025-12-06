@@ -253,7 +253,6 @@ module apb_slave #(parameter ADDR_WIDTH = 8, WIDTH = 8)
 
 endmodule
 */
-
 module apb_slave #(parameter ADDR_WIDTH=8, DATA_WIDTH = 32)(
     input         PCLK,      // Peripheral Clock
     input         PRESETn,   // Active Low Reset
@@ -353,6 +352,7 @@ module apb_slave #(parameter ADDR_WIDTH=8, DATA_WIDTH = 32)(
     end
   end
 endmodule
+
 /*
 module apb_slave #(parameter ADDR_WIDTH = 8, DATA_WIDTH = 8)
 (

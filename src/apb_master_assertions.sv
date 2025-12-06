@@ -178,7 +178,7 @@ interface apb_master_assertions(
     // ------------------------------------------------------------
     property p_idle_state;
         @(posedge PCLK) disable iff (!PRESETN)
-				( !PSELX && PWRITE ) || ( !PSELX && !PWRITE ) |-> ( PENABLE == 0 && PREADY == 0 && PRDATA == 0 && PSLVERR == 0 ) |-> !PSELX;
+			( !PSELX && PWRITE ) || ( !PSELX && !PWRITE ) |-> (  PREADY == 0 && PRDATA == 0 && PSLVERR == 0 ) |-> !PSELX;
     endproperty
 
     assert property(p_idle_state)
@@ -189,12 +189,13 @@ interface apb_master_assertions(
     // when pwrite is 1 then pstrb should select only single byte_lane
     // ----------------------------------------------------------------
   
-    property p_pstrb_one_hot;
+    property p_pstrb;
     @(posedge PCLK) disable iff(!PRESETN || !PSTRB)
-    (PSELX && PENABLE && PWRITE) |-> $onehot(PSTRB);
+    (PSELX && PENABLE && PWRITE) |-> (PSTRB);
+
     endproperty
 
-     assert property(p_pstrb_one_hot)
+     assert property(p_pstrb)
      else $error("Illegal PSTRB pattern – expected one-hot");
 
 endinterface

@@ -49,7 +49,7 @@ module top;
 	);
 
 	// instantiating assertion signals
-	bind vif apb_master_assertions ASSERT(
+		bind vif apb_master_assertions ASSERT(
 		.PCLK(vif.PCLK),
 		.PRESETN(vif.PRESETN),
 		.PADDR(vif.PADDR),

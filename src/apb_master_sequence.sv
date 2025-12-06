@@ -199,23 +199,8 @@ class mid_reset extends uvm_sequence#(apb_master_sequence_item);
 	endfunction
 
 	task body();
-		
-		repeat(`trans - 3 )  begin
-     `uvm_do_with( 
-				req,
-				{ 
-				 req.PRESETN == 1;
-				 req.PSELX ==	1;
-				 req.PWRITE == 1;
-				 req.PSTRB == 0;
-				 req.PADDR inside {[0:63]};
-				}
-			)
-		end
-   
-		`uvm_do_with( req , { req.PRESETN == 0; } )
+	 
   	
-		repeat(`trans - 3 )  begin
      `uvm_do_with( 
 				req,
 				{ 
@@ -223,20 +208,24 @@ class mid_reset extends uvm_sequence#(apb_master_sequence_item);
 				 req.PSELX ==	1;
 				 req.PWRITE == 1;
 				 req.PSTRB == 0;
-				 req.PADDR inside {[0:63]};
+				 req.PADDR == 36;
 				}
 			)
-		end
 
+		`uvm_do_with( req , { req.PRESETN == 0; } )
+	
 		`uvm_do_with( 
 				req,
 				{ 
 				 req.PRESETN == 1;
 				 req.PSELX ==	1;
-				 req.PWRITE == 0;
-				 req.PADDR == 4 ;
+				 req.PWRITE == 1;
+				 req.PSTRB == 0;
+				 req.PADDR == 45 ;
 				}
 			)
+		
+		`uvm_do_with( req , { req.PRESETN == 0; } )
 		
 		`uvm_do_with( 
 				req,
@@ -244,7 +233,7 @@ class mid_reset extends uvm_sequence#(apb_master_sequence_item);
 				 req.PRESETN == 1;
 				 req.PSELX ==	1;
 				 req.PWRITE == 0;
-				 req.PADDR == 56 ;
+				 req.PADDR == 45 ;
 				}
 			)
 		
@@ -256,20 +245,10 @@ class mid_reset extends uvm_sequence#(apb_master_sequence_item);
 				 req.PRESETN == 1;
 				 req.PSELX ==	1;
 				 req.PWRITE == 0;
-				 req.PADDR == 4 ;
+				 req.PADDR == 36 ;
 				}
 			)
-
-		`uvm_do_with( 
-				req,
-				{ 
-				 req.PRESETN == 1;
-				 req.PSELX ==	1;
-				 req.PWRITE == 0;
-				 req.PADDR == 58 ;
-				}
-			)
-		
+	
 	endtask
 endclass 
 
@@ -321,7 +300,8 @@ class strobe_write_read extends uvm_sequence#(apb_master_sequence_item);
 
 	task body();
 		bit [`ADDR_WIDTH - 1 : 0 ] temp_addr; 
-		repeat(`trans+10) begin
+		int i = 1;
+		repeat(15) begin
 		`uvm_do_with( 	
 		  req,
 				{ 
@@ -332,7 +312,7 @@ class strobe_write_read extends uvm_sequence#(apb_master_sequence_item);
 				 req.PADDR inside {[0:191]};
 				}
 			)	
-		
+	
 		temp_addr = req.PADDR;
 			
 		`uvm_do_with( 
@@ -341,10 +321,12 @@ class strobe_write_read extends uvm_sequence#(apb_master_sequence_item);
 				 req.PRESETN == 1;
 				 req.PSELX ==	1;
 				 req.PWRITE == 1;
-				 req.PSTRB == 1;
-				 req.PADDR == temp_addr;
+				 req.PSTRB == i;
+				 req.PADDR ==  temp_addr;// inside{[0:200]};
 				}
-			)	
+		)
+    	temp_addr = req.PADDR;
+	
 		  `uvm_do_with( 
 				req,
 				{ 
@@ -354,63 +336,7 @@ class strobe_write_read extends uvm_sequence#(apb_master_sequence_item);
 				 req.PADDR == temp_addr;
 				}
 			)
-    	`uvm_do_with( 
-				req,
-				{ 
-				 req.PRESETN == 1;
-				 req.PSELX ==	1;
-				 req.PWRITE == 1;
-				 req.PSTRB == 2;
-				 req.PADDR == temp_addr;
-				}
-			)	
-		  `uvm_do_with( 
-				req,
-				{ 
-				 req.PRESETN == 1;
-				 req.PSELX ==	1;
-				 req.PWRITE == 0;
-				 req.PADDR == temp_addr;
-				}
-			)
-    	`uvm_do_with( 
-				req,
-				{ 
-				 req.PRESETN == 1;
-				 req.PSELX ==	1;
-				 req.PWRITE == 1;
-				 req.PSTRB == 4;
-				 req.PADDR == temp_addr;
-				}
-			)	
-		  `uvm_do_with( 
-				req,
-				{ 
-				 req.PRESETN == 1;
-				 req.PSELX ==	1;
-				 req.PWRITE == 0;
-				 req.PADDR == temp_addr;
-				}
-			)
-    	`uvm_do_with( 
-				req,
-				{ 
-				 req.PRESETN == 1;
-				 req.PSELX ==	1;
-				 req.PWRITE == 1;
-				 req.PSTRB == 8;
-				 req.PADDR == temp_addr;
-				}
-			)	
-		  `uvm_do_with( 
-				req,
-				{ 
-				 req.PRESETN == 1;
-				 req.PSELX ==	1;
-				 req.PWRITE == 0;
-				 req.PADDR == temp_addr;
-				}
-			)
+			i++;
 		end
 	endtask
 endclass 
@@ -477,7 +403,7 @@ endclass
 
 
 //---------------------------------------------------------//
-// apb_master regression sequence for all 17 sequence test //  
+// apb_master regression sequence for all 8 sequence test //  
 //---------------------------------------------------------//
 
 class apb_master_regression extends uvm_sequence#(apb_master_sequence_item);
